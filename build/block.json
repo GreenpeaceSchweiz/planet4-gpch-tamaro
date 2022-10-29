@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "planet4-gpch-tamaro/tamaro-widget",
+  "version": "0.1.0",
+  "title": "Tamaro Widget",
+  "category": "gpch",
+  "icon": "money",
+  "description": "A configurable block providing the RaiseNow Tamaro Widget.",
+  "attributes": {
+    "message": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "planet4-gpch-tamaro",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
