@@ -5,13 +5,27 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-@font-face {
-	font-family: Gilbert;
-	src: url(../assets/gilbert-color.otf);
-	font-weight: 700;
+.wp-block-planet4-gpch-tamaro-tamaro-widget {
 }
 
-.wp-block-planet4-gpch-tamaro-tamaro-widget {
-	font-family: Gilbert, sans-serif;
-	font-size: 64px;
+:root {
+	--tamaro-primary-color: #333333;
+	--tamaro-primary-color__hover: #777777;
+	--tamaro-primary-bg-color: #f2f2fb;
+}
+
+.rnw-widget-container {
+	width: 100%;
+	max-width: 37.5rem;
+	margin: 0 auto;
+}
+
+#tamaro-widget.tamaro-widget {
+	padding: 2rem;
+	box-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.1);
+}
+
+#tamaro-widget.tamaro-widget .error-widget,
+body.tamaro-widget-overlay-inner.tamaro-widget-overlay-shown #tamaro-widget.tamaro-widget .overlay-block-wrapper {
+	margin: -2rem;
 }

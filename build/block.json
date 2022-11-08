@@ -8,7 +8,17 @@
   "icon": "money",
   "description": "A configurable block providing the RaiseNow Tamaro Widget.",
   "attributes": {
-    "message": {
+    "language": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    },
+    "defaultPaymentType": {
+      "type": "string",
+      "source": "text",
+      "selector": "div"
+    },
+    "defaultRecurringInterval": {
       "type": "string",
       "source": "text",
       "selector": "div"

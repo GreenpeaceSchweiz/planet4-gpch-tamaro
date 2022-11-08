@@ -17,7 +17,10 @@
 	"devDependencies": {
 		"@wordpress/scripts": "^24.4.0"
 	},
-	"jshintConfig":{
-		"esversion": 6
+	"jshintConfig": {
+		"esversion": 11
+	},
+	"dependencies": {
+		"@wordpress/components": "^21.3.0"
 	}
 }

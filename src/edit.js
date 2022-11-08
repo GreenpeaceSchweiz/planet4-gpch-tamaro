@@ -4,6 +4,9 @@
  * @see https://developer.wordpress.org/block-editor/packages/packages-components/
  */
 import { TextControl } from '@wordpress/components';
+import { SelectControl } from '@wordpress/components';
+
+import { useState } from '@wordpress/element';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -29,10 +32,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
 	return (
 		<div { ...blockProps }>
-			<TextControl
-				value={ attributes.message }
-				onChange={ ( val ) => setAttributes( { message: val } ) }
-			/>
+			<SelectControl label="Language" value={ attributes.language } options={ [{ label: 'German', value: 'de' }, { label: 'French', value: 'fr' }, { label: 'Italian', value: 'it' }] } onChange={ ( val ) => setAttributes( { language: val } ) }/>
+			<TextControl value={ attributes.defaultPaymentType } onChange={ ( val ) => setAttributes( { defaultPaymentType: val } ) }/>
+			<TextControl value={ attributes.defaultRecurringInterval } onChange={ ( val ) => setAttributes( { defaultRecurringInterval: val } ) }/>
 		</div>
 	);
 }

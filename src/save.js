@@ -19,5 +19,14 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function save( { attributes } ) {
 	const blockProps = useBlockProps.save();
-	return <div { ...blockProps }>{ attributes.message }</div>;
+	return (
+		<div { ...blockProps }>
+			<div>{ attributes.language }</div>
+			<div>{ attributes.defaultPaymentType }</div>
+			<div>{ attributes.defaultRecurringInterval }</div>
+			<div className="rnw-widget-container"></div>
+			<script src="https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"></script>
+			<script src="https://tamaro.greenpeace.ch/tamaro_standard_de.js"></script>
+		</div>
+	);
 }

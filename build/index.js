@@ -26,6 +26,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -52,10 +54,31 @@ function Edit(_ref) {
     setAttributes
   } = _ref;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: attributes.message,
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    label: "Language",
+    value: attributes.language,
+    options: [{
+      label: 'German',
+      value: 'de'
+    }, {
+      label: 'French',
+      value: 'fr'
+    }, {
+      label: 'Italian',
+      value: 'it'
+    }],
     onChange: val => setAttributes({
-      message: val
+      language: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: attributes.defaultPaymentType,
+    onChange: val => setAttributes({
+      defaultPaymentType: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: attributes.defaultRecurringInterval,
+    onChange: val => setAttributes({
+      defaultRecurringInterval: val
     })
   }));
 }
@@ -107,21 +130,12 @@ __webpack_require__.r(__webpack_exports__);
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
-  /**
-   * Used to construct a preview for the block to be shown in the block inserter.
-   */
   example: {
     attributes: {
       message: 'Tamaro Widget'
     }
   },
-  /**
-   * @see ./edit.js
-   */
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
-  /**
-   * @see ./save.js
-   */
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
@@ -166,7 +180,13 @@ function save(_ref) {
     attributes
   } = _ref;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, attributes.message);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.language), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.defaultPaymentType), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, attributes.defaultRecurringInterval), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "rnw-widget-container"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", {
+    src: "https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", {
+    src: "https://tamaro.greenpeace.ch/tamaro_standard_de.js"
+  }));
 }
 
 /***/ }),
@@ -241,7 +261,7 @@ module.exports = window["wp"]["element"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"planet4-gpch-tamaro/tamaro-widget","version":"0.1.0","title":"Tamaro Widget","category":"gpch","icon":"money","description":"A configurable block providing the RaiseNow Tamaro Widget.","attributes":{"message":{"type":"string","source":"text","selector":"div"}},"supports":{"html":false},"textdomain":"planet4-gpch-tamaro","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"planet4-gpch-tamaro/tamaro-widget","version":"0.1.0","title":"Tamaro Widget","category":"gpch","icon":"money","description":"A configurable block providing the RaiseNow Tamaro Widget.","attributes":{"language":{"type":"string","source":"text","selector":"div"},"defaultPaymentType":{"type":"string","source":"text","selector":"div"},"defaultRecurringInterval":{"type":"string","source":"text","selector":"div"}},"supports":{"html":false},"textdomain":"planet4-gpch-tamaro","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
