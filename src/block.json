@@ -9,19 +9,13 @@
 	"description": "A configurable block providing the RaiseNow Tamaro Widget.",
 	"attributes": {
 		"language": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
+			"type": "string"
 		},
 		"defaultPaymentType": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
+			"type": "string"
 		},
 		"defaultRecurringInterval": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
+			"type": "string"
 		}
 	},
 	"supports": {

@@ -13,14 +13,17 @@
  * @package           create-block
  */
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
 function create_block_planet4_gpch_tamaro_block_init() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build', array( 'render_callback' => 'planet4_gpch_tamaro_render_callback' ) );
 }
+
 add_action( 'init', 'create_block_planet4_gpch_tamaro_block_init' );
+
+function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
+
+	// prepare parameters for template
+	$params = array( 'attributes' => $block_attributes );
+
+	// output template
+	return \Timber::fetch( __DIR__ . '/templates/tamaro.twig', $params );
+}

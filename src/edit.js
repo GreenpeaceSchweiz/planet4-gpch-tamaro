@@ -1,40 +1,15 @@
-/**
- * WordPress components that create the necessary UI elements for the block
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-components/
- */
-import { TextControl } from '@wordpress/components';
-import { SelectControl } from '@wordpress/components';
-
+import { TextControl, SelectControl, CheckboxControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import { useBlockProps } from '@wordpress/block-editor';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @param {Object}   props               Properties passed to the function.
- * @param {Object}   props.attributes    Available block attributes.
- * @param {Function} props.setAttributes Function that updates individual attributes.
- *
- * @return {WPElement} Element to render.
- */
 export default function Edit( { attributes, setAttributes } ) {
-	const blockProps = useBlockProps();
+	const [ isChecked, setChecked ] = useState( true );
 	return (
-		<div { ...blockProps }>
+		<div { ...useBlockProps() }>
+			<CheckboxControl label="Test Mode" checked={ isChecked } onChange={ setChecked }/>
 			<SelectControl label="Language" value={ attributes.language } options={ [{ label: 'German', value: 'de' }, { label: 'French', value: 'fr' }, { label: 'Italian', value: 'it' }] } onChange={ ( val ) => setAttributes( { language: val } ) }/>
-			<TextControl value={ attributes.defaultPaymentType } onChange={ ( val ) => setAttributes( { defaultPaymentType: val } ) }/>
-			<TextControl value={ attributes.defaultRecurringInterval } onChange={ ( val ) => setAttributes( { defaultRecurringInterval: val } ) }/>
+			<SelectControl label="Default Payment Type" value={ attributes.defaultPaymentType } options={ [{ label: 'Onetime', value: 'onetime' }, { label: 'Recurring', value: 'recurring' }] } onChange={ ( val ) => setAttributes( { defaultPaymentType: val } ) }/>
+			<SelectControl label="Default Recurring Interval" value={ attributes.defaultRecurringInterval } options={ [{ label: 'Monthly', value: 'monthly' }, { label: 'Quarterly', value: 'quarterly' }, { label: 'Semestral', value: 'semestral' }, { label: 'Yearly', value: 'yearly' }] } onChange={ ( val ) => setAttributes( { defaultRecurringInterval: val } ) }/>
 		</div>
 	);
 }
