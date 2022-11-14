@@ -21,8 +21,19 @@ add_action( 'init', 'create_block_planet4_gpch_tamaro_block_init' );
 
 function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 
+	$tamaroAttributes = array();
+
+	$tamaroAttributes['debug'] = $block_attributes['debug'] ? 'true' : 'false';
+	$tamaroAttributes['testMode'] = $block_attributes['testMode'] ? 'true' : 'false';
+	$tamaroAttributes['language'] = $block_attributes['language'];
+	$tamaroAttributes['defaultPaymentType'] = $block_attributes['defaultPaymentType'];
+	$tamaroAttributes['defaultRecurringInterval'] = $block_attributes['defaultRecurringInterval'];
+
 	// prepare parameters for template
-	$params = array( 'attributes' => $block_attributes );
+	$params = array(
+		'blockAttributes' => $block_attributes,
+		'tamaroAttributes' => $tamaroAttributes
+	);
 
 	// output template
 	return \Timber::fetch( __DIR__ . '/templates/tamaro.twig', $params );

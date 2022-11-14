@@ -1,3 +1,25 @@
+<p>
+	{{ blockAttributes.debug }}<br>
+	{{ blockAttributes.testMode }}<br>
+	{{ blockAttributes.language }}<br>
+	{{ blockAttributes.defaultPaymentType }}<br>
+	{{ blockAttributes.defaultRecurringInterval }}<br>
+	{{ blockAttributes.minimumCustomAmountOnetime }}<br>
+	{{ blockAttributes.amountsOnetime }}<br>
+	{{ blockAttributes.minimumCustomAmountRecurringMonthly }}<br>
+	{{ blockAttributes.amountsRecurringMonthly }}<br>
+	{{ blockAttributes.salesforceCampaignID }}<br>
+	{{ blockAttributes.salesforceProduct }}<br>
+</p>
+
+<p>
+	{{ tamaroAttributes.debug }}<br>
+	{{ tamaroAttributes.testMode }}<br>
+	{{ tamaroAttributes.language }}<br>
+	{{ tamaroAttributes.defaultPaymentType }}<br>
+	{{ tamaroAttributes.defaultRecurringInterval }}<br>
+</p>
+
 <div class="wp-block-planet4-gpch-tamaro-tamaro-widget">
 
 	<div class="rnw-widget-container"></div>
@@ -6,11 +28,11 @@
 
 	<script>
 		window.rnw.tamaro.runWidget('.rnw-widget-container', {
-			debug: true,
-			testMode: true,
-			language: '{{ attributes.language }}',
-			defaultPaymentType: '{{ attributes.defaultPaymentType }}',
-			defaultRecurringInterval: '{{ attributes.defaultRecurringInterval }}',
+			debug: {{ tamaroAttributes.debug }},
+			testMode: {{ tamaroAttributes.testMode }},
+			language: '{{ tamaroAttributes.language }}',
+			defaultPaymentType: '{{ tamaroAttributes.defaultPaymentType }}',
+			defaultRecurringInterval: '{{ tamaroAttributes.defaultRecurringInterval }}',
 			showStoredCustomerEmailPermission: true,
 			showStoredCustomerDonationReceipt: false,
 			show_submit_button: false,

@@ -21,17 +21,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function Edit(_ref) {
   let {
     attributes,
     setAttributes
   } = _ref;
-  const [isChecked, setChecked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Debug",
+    checked: attributes.debug,
+    onChange: val => setAttributes({
+      debug: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
     label: "Test Mode",
-    checked: isChecked,
-    onChange: setChecked
+    checked: attributes.testMode,
+    onChange: val => setAttributes({
+      testMode: val
+    })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: "Language",
     value: attributes.language,
@@ -79,6 +85,61 @@ function Edit(_ref) {
     }],
     onChange: val => setAttributes({
       defaultRecurringInterval: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Minimum Custom Amount Onetime",
+    value: attributes.minimumCustomAmountOnetime,
+    onChange: val => setAttributes({
+      minimumCustomAmountOnetime: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Amounts Onetime",
+    value: attributes.amountsOnetime,
+    onChange: val => setAttributes({
+      amountsOnetime: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Minimum Custom Amount Recurring (monthly)",
+    value: attributes.minimumCustomAmountRecurringMonthly,
+    onChange: val => setAttributes({
+      minimumCustomAmountRecurringMonthly: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Amounts Recurring (monthly)",
+    value: attributes.amountsRecurringMonthly,
+    onChange: val => setAttributes({
+      amountsRecurringMonthly: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Salesforce Campaign ID",
+    value: attributes.salesforceCampaignID,
+    onChange: val => setAttributes({
+      salesforceCampaignID: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    label: "Salesforce Product",
+    value: attributes.salesforceProduct,
+    options: [{
+      label: 'Standard Donation',
+      value: 'Standard Donation'
+    }, {
+      label: 'Sponsorship Agriculture',
+      value: 'Sponsorship Agriculture'
+    }, {
+      label: 'Sponsorship Climate',
+      value: 'Sponsorship Climate'
+    }, {
+      label: 'Sponsorship Fleet',
+      value: 'Sponsorship Fleet'
+    }, {
+      label: 'Sponsorship Forest',
+      value: 'Sponsorship Forest'
+    }, {
+      label: 'Sponsorship Ocean',
+      value: 'Sponsorship Ocean'
+    }],
+    onChange: val => setAttributes({
+      salesforceProduct: val
     })
   }));
 }
@@ -179,7 +240,7 @@ module.exports = window["wp"]["element"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"planet4-gpch-tamaro/tamaro-widget","version":"0.1.0","title":"Tamaro Widget","category":"gpch","icon":"money","description":"A configurable block providing the RaiseNow Tamaro Widget.","attributes":{"language":{"type":"string"},"defaultPaymentType":{"type":"string"},"defaultRecurringInterval":{"type":"string"}},"supports":{"html":false},"textdomain":"planet4-gpch-tamaro","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"planet4-gpch-tamaro/tamaro-widget","version":"0.1.0","title":"Tamaro Widget","category":"gpch","icon":"money","description":"A configurable block providing the RaiseNow Tamaro Widget.","attributes":{"debug":{"type":"boolean"},"testMode":{"type":"boolean"},"language":{"type":"string"},"defaultPaymentType":{"type":"string"},"defaultRecurringInterval":{"type":"string"},"minimumCustomAmountOnetime":{"type":"string"},"amountsOnetime":{"type":"string"},"minimumCustomAmountRecurringMonthly":{"type":"string"},"amountsRecurringMonthly":{"type":"string"},"salesforceCampaignID":{"type":"string"},"salesforceProduct":{"type":"string"}},"supports":{"html":false},"textdomain":"planet4-gpch-tamaro","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
