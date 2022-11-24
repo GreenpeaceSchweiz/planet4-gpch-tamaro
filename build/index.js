@@ -38,7 +38,7 @@ function Edit(_ref) {
     onChange: val => setAttributes({
       testMode: val
     })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: "Language",
     value: attributes.language,
     options: [{
@@ -90,26 +90,30 @@ function Edit(_ref) {
     label: "Minimum Custom Amount Onetime",
     value: attributes.minimumCustomAmountOnetime,
     onChange: val => setAttributes({
-      minimumCustomAmountOnetime: val
-    })
+      minimumCustomAmountOnetime: parseInt(val)
+    }),
+    help: "Minimum custom amount which can be set on the form for onetime donations."
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: "Amounts Onetime",
     value: attributes.amountsOnetime,
     onChange: val => setAttributes({
       amountsOnetime: val
-    })
+    }),
+    help: "Predefined amounts which appear on the form for onetime donations (comma separated list, example: 39,84,150,250)."
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: "Minimum Custom Amount Recurring (monthly)",
     value: attributes.minimumCustomAmountRecurringMonthly,
     onChange: val => setAttributes({
-      minimumCustomAmountRecurringMonthly: val
-    })
+      minimumCustomAmountRecurringMonthly: parseInt(val)
+    }),
+    help: "Minimum custom amount which can be set on the form for monthly recurring donations."
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: "Amounts Recurring (monthly)",
     value: attributes.amountsRecurringMonthly,
     onChange: val => setAttributes({
       amountsRecurringMonthly: val
-    })
+    }),
+    help: "Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 7,10,20,50)."
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: "Salesforce Campaign ID",
     value: attributes.salesforceCampaignID,
@@ -240,7 +244,7 @@ module.exports = window["wp"]["element"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"planet4-gpch-tamaro/tamaro-widget","version":"0.1.0","title":"Tamaro Widget","category":"gpch","icon":"money","description":"A configurable block providing the RaiseNow Tamaro Widget.","attributes":{"debug":{"type":"boolean"},"testMode":{"type":"boolean"},"language":{"type":"string"},"defaultPaymentType":{"type":"string"},"defaultRecurringInterval":{"type":"string"},"minimumCustomAmountOnetime":{"type":"string"},"amountsOnetime":{"type":"string"},"minimumCustomAmountRecurringMonthly":{"type":"string"},"amountsRecurringMonthly":{"type":"string"},"salesforceCampaignID":{"type":"string"},"salesforceProduct":{"type":"string"}},"supports":{"html":false},"textdomain":"planet4-gpch-tamaro","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"planet4-gpch-tamaro/tamaro-widget","version":"0.1.0","title":"Tamaro Widget","category":"gpch","icon":"money","description":"A configurable block providing the RaiseNow Tamaro Widget.","attributes":{"debug":{"type":"boolean"},"testMode":{"type":"boolean"},"language":{"type":"string"},"defaultPaymentType":{"type":"string"},"defaultRecurringInterval":{"type":"string"},"minimumCustomAmountOnetime":{"type":"integer"},"amountsOnetime":{"type":"string"},"minimumCustomAmountRecurringMonthly":{"type":"integer"},"amountsRecurringMonthly":{"type":"string"},"salesforceCampaignID":{"type":"string"},"salesforceProduct":{"type":"string"}},"supports":{"html":false},"textdomain":"planet4-gpch-tamaro","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

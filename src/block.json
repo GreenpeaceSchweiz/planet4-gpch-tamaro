@@ -24,13 +24,13 @@
 			"type": "string"
 		},
 		"minimumCustomAmountOnetime": {
-			"type": "string"
+			"type": "integer"
 		},
 		"amountsOnetime": {
 			"type": "string"
 		},
 		"minimumCustomAmountRecurringMonthly": {
-			"type": "string"
+			"type": "integer"
 		},
 		"amountsRecurringMonthly": {
 			"type": "string"
