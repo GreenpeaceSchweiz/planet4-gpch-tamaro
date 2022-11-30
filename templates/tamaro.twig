@@ -1,24 +1,22 @@
-<p>
-	{{ blockAttributes.debug }}<br>
-	{{ blockAttributes.testMode }}<br>
-	{{ blockAttributes.language }}<br>
-	{{ blockAttributes.defaultPaymentType }}<br>
-	{{ blockAttributes.defaultRecurringInterval }}<br>
-	{{ blockAttributes.minimumCustomAmountOnetime }}<br>
-	{{ blockAttributes.amountsOnetime }}<br>
-	{{ blockAttributes.minimumCustomAmountRecurringMonthly }}<br>
-	{{ blockAttributes.amountsRecurringMonthly }}<br>
-	{{ blockAttributes.salesforceCampaignID }}<br>
-	{{ blockAttributes.salesforceProduct }}<br>
-</p>
-
-<p>
+<!-- <p>
 	{{ tamaroAttributes.debug }}<br>
 	{{ tamaroAttributes.testMode }}<br>
 	{{ tamaroAttributes.language }}<br>
 	{{ tamaroAttributes.defaultPaymentType }}<br>
 	{{ tamaroAttributes.defaultRecurringInterval }}<br>
-</p>
+	{{ tamaroAttributes.minimumCustomAmountOnetime }}<br>
+	{{ tamaroAttributes.amountsOnetime }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringMonthly }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringQuarterly }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringSemestral }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringYearly }}<br>
+	{{ tamaroAttributes.amountsRecurringMonthly }}<br>
+	{{ tamaroAttributes.amountsRecurringQuarterly }}<br>
+	{{ tamaroAttributes.amountsRecurringSemestral }}<br>
+	{{ tamaroAttributes.amountsRecurringYearly }}<br>
+	{{ tamaroAttributes.salesforceCampaignID }}<br>
+	{{ tamaroAttributes.salesforceProduct }}<br>
+</p> -->
 
 <div class="wp-block-planet4-gpch-tamaro-tamaro-widget">
 
@@ -41,7 +39,7 @@
 				stored_customer_email_permission: true,
 				stored_customer_donation_receipt: true,
 				stored_sf_Contact_Source__c: 'Internet',
-				gpch_product: 'Standard Donation',
+				gpch_product: '{{ tamaroAttributes.salesforceProduct }}',
 				stored_sf_Opportunity_Product__c: '',
 				stored_sf_npe03__Recurring_Donation__c_Product__c: ''
 			},
@@ -52,7 +50,7 @@
 			purposes: ['p1'],
 			purposeDetails: {
 				p1: {
-					stored_campaign_id: '701090000005aTcAAI'
+					stored_campaign_id: '{{ tamaroAttributes.salesforceCampaignID }}'
 				}
 			},
 			slots: {
@@ -113,45 +111,45 @@
 			amounts: [
 				{
 					"if": "paymentType() == onetime",
-					"then": [39,84,150,250]
+					"then": [{{ tamaroAttributes.amountsOnetime }}]
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == monthly",
-					"then": [7,10,20,50]
+					"then": [{{ tamaroAttributes.amountsRecurringMonthly }}]
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == quarterly",
-					"then": [21,30,60,150]
+					"then": [{{ tamaroAttributes.amountsRecurringQuarterly }}]
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == semestral",
-					"then": [42,60,120,300]
+					"then": [{{ tamaroAttributes.amountsRecurringSemestral }}]
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == yearly",
-					"then": [84,120,240,600]
+					"then": [{{ tamaroAttributes.amountsRecurringYearly }}]
 				}
 			],
 			minimumCustomAmount: [
 				{
 					"if": "paymentType() == onetime",
-					"then": 1
+					"then": {{ tamaroAttributes.minimumCustomAmountOnetime }}
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == monthly",
-					"then": 2
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringMonthly }}
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == quarterly",
-					"then": 6
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringQuarterly }}
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == semestral",
-					"then": 12
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringSemestral }}
 				},
 				{
 					"if": "paymentType() == recurring && recurringInterval() == yearly",
-					"then": 24
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringYearly }}
 				}
 			]
 		});

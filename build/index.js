@@ -42,6 +42,10 @@ function Edit(_ref) {
     label: "Language",
     value: attributes.language,
     options: [{
+      label: 'Select an option ...',
+      value: '',
+      disabled: false
+    }, {
       label: 'German',
       value: 'de'
     }, {
@@ -58,6 +62,10 @@ function Edit(_ref) {
     label: "Default Payment Type",
     value: attributes.defaultPaymentType,
     options: [{
+      label: 'Select an option ...',
+      value: '',
+      disabled: false
+    }, {
       label: 'Onetime',
       value: 'onetime'
     }, {
@@ -71,6 +79,10 @@ function Edit(_ref) {
     label: "Default Recurring Interval",
     value: attributes.defaultRecurringInterval,
     options: [{
+      label: 'Select an option ...',
+      value: '',
+      disabled: false
+    }, {
       label: 'Monthly',
       value: 'monthly'
     }, {
@@ -124,6 +136,10 @@ function Edit(_ref) {
     label: "Salesforce Product",
     value: attributes.salesforceProduct,
     options: [{
+      label: 'Select an option ...',
+      value: '',
+      disabled: false
+    }, {
       label: 'Standard Donation',
       value: 'Standard Donation'
     }, {
