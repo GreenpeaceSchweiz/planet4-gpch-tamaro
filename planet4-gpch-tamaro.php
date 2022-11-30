@@ -60,7 +60,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	}
 
 	// language
-	$allowedLanguages = array( 'de', 'en', 'it' );
+	$allowedLanguages = array( 'de', 'fr', 'it' );
 	if ( array_key_exists( 'language', $block_attributes ) && in_array( $block_attributes['language'], $allowedLanguages ) ) {
 		$tamaroAttributes['language'] = $block_attributes['language'];
 	} else {
