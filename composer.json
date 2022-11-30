@@ -1,0 +1,7 @@
+{
+    "name": "greenpeace/planet4-gpch-plugin-tamaro",
+    "description": "A plugin to provide the RaiseNow Tamaro Widget as a configurable block.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {}
+}
