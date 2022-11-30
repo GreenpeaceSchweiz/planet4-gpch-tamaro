@@ -8,10 +8,38 @@
 	"icon": "money",
 	"description": "A configurable block providing the RaiseNow Tamaro Widget.",
 	"attributes": {
-		"message": {
-			"type": "string",
-			"source": "text",
-			"selector": "div"
+		"debug": {
+			"type": "boolean"
+		},
+		"testMode": {
+			"type": "boolean"
+		},
+		"language": {
+			"type": "string"
+		},
+		"defaultPaymentType": {
+			"type": "string"
+		},
+		"defaultRecurringInterval": {
+			"type": "string"
+		},
+		"minimumCustomAmountOnetime": {
+			"type": "integer"
+		},
+		"amountsOnetime": {
+			"type": "string"
+		},
+		"minimumCustomAmountRecurringMonthly": {
+			"type": "integer"
+		},
+		"amountsRecurringMonthly": {
+			"type": "string"
+		},
+		"salesforceCampaignID": {
+			"type": "string"
+		},
+		"salesforceProduct": {
+			"type": "string"
 		}
 	},
 	"supports": {

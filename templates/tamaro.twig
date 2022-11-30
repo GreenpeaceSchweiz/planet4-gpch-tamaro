@@ -1,0 +1,192 @@
+<!-- <p>
+	{{ tamaroAttributes.debug }}<br>
+	{{ tamaroAttributes.testMode }}<br>
+	{{ tamaroAttributes.language }}<br>
+	{{ tamaroAttributes.defaultPaymentType }}<br>
+	{{ tamaroAttributes.defaultRecurringInterval }}<br>
+	{{ tamaroAttributes.minimumCustomAmountOnetime }}<br>
+	{{ tamaroAttributes.amountsOnetime }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringMonthly }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringQuarterly }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringSemestral }}<br>
+	{{ tamaroAttributes.minimumCustomAmountRecurringYearly }}<br>
+	{{ tamaroAttributes.amountsRecurringMonthly }}<br>
+	{{ tamaroAttributes.amountsRecurringQuarterly }}<br>
+	{{ tamaroAttributes.amountsRecurringSemestral }}<br>
+	{{ tamaroAttributes.amountsRecurringYearly }}<br>
+	{{ tamaroAttributes.salesforceCampaignID }}<br>
+	{{ tamaroAttributes.salesforceProduct }}<br>
+</p> -->
+
+<div class="wp-block-planet4-gpch-tamaro-tamaro-widget">
+
+	<div class="rnw-widget-container"></div>
+
+	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"></script>
+
+	<script>
+		window.rnw.tamaro.runWidget('.rnw-widget-container', {
+			debug: {{ tamaroAttributes.debug }},
+			testMode: {{ tamaroAttributes.testMode }},
+			language: '{{ tamaroAttributes.language }}',
+			defaultPaymentType: '{{ tamaroAttributes.defaultPaymentType }}',
+			defaultRecurringInterval: '{{ tamaroAttributes.defaultRecurringInterval }}',
+			showStoredCustomerEmailPermission: true,
+			showStoredCustomerDonationReceipt: false,
+			show_submit_button: false,
+			show_footer: false,
+			paymentFormPrefill: {
+				stored_customer_email_permission: true,
+				stored_customer_donation_receipt: true,
+				stored_sf_Contact_Source__c: 'Internet',
+				gpch_product: '{{ tamaroAttributes.salesforceProduct }}',
+				stored_sf_Opportunity_Product__c: '',
+				stored_sf_npe03__Recurring_Donation__c_Product__c: ''
+			},
+			paymentWidgetBlocks: [
+				'payment_amounts_and_intervals',
+				'slot_gpch_next_step_button'
+			],
+			purposes: ['p1'],
+			purposeDetails: {
+				p1: {
+					stored_campaign_id: '{{ tamaroAttributes.salesforceCampaignID }}'
+				}
+			},
+			slots: {
+				slot_gpch_next_step_button: [{
+					component: "block",
+					children: [{
+						component: "block_content",
+						children: [{
+							component: "content",
+							text_html: "gpch_next_step_button"
+						}]
+					}]
+				}]
+			},
+			translations: {
+				en: {
+					purposes: {
+						p1: 'Greenpeace Switzerland'
+					},
+					blocks: {
+						payment_profile: {
+							email_permission_info_html: "<p>I would like Greenpeace Switzerland to inform me by e-mail about ongoing projects.</p>\n"
+						}
+					},
+					gpch_next_step_button: '<button type="button" class="btn btn-block btn-primary" onClick="gpchTamaro.nextStep()"><span class="btn-text">Next Step</span></button>'
+				},
+				de: {
+					purposes: {
+						p1: 'Greenpeace Schweiz'
+					},
+					blocks: {
+						payment_profile: {
+							email_permission_info_html: "<p>Ich möchte, dass Greenpeace Schweiz mich per E-Mail über laufende Projekte informiert.</p>\n"
+						}
+					}
+				},
+				fr: {
+					purposes: {
+						p1: 'Greenpeace Suisse'
+					},
+					blocks: {
+						payment_profile: {
+							email_permission_info_html: "<p>Je veux que Greenpeace Suisse m'informe par e-mail des projets en cours.</p>\n"
+						}
+					}
+				},
+				it: {
+					purposes: {
+						p1: 'Greenpeace Svizzera'
+					},
+					blocks: {
+						payment_profile: {
+							email_permission_info_html: "<p>Desidero che Greenpeace Svizzera mi informi via e-mail sui progetti in corso.</p>\n"
+						}
+					}
+				}
+			},
+			amounts: [
+				{
+					"if": "paymentType() == onetime",
+					"then": [{{ tamaroAttributes.amountsOnetime }}]
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == monthly",
+					"then": [{{ tamaroAttributes.amountsRecurringMonthly }}]
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == quarterly",
+					"then": [{{ tamaroAttributes.amountsRecurringQuarterly }}]
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == semestral",
+					"then": [{{ tamaroAttributes.amountsRecurringSemestral }}]
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == yearly",
+					"then": [{{ tamaroAttributes.amountsRecurringYearly }}]
+				}
+			],
+			minimumCustomAmount: [
+				{
+					"if": "paymentType() == onetime",
+					"then": {{ tamaroAttributes.minimumCustomAmountOnetime }}
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == monthly",
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringMonthly }}
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == quarterly",
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringQuarterly }}
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == semestral",
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringSemestral }}
+				},
+				{
+					"if": "paymentType() == recurring && recurringInterval() == yearly",
+					"then": {{ tamaroAttributes.minimumCustomAmountRecurringYearly }}
+				}
+			]
+		});
+
+		var gpchTamaro = gpchTamaro || {};
+
+		gpchTamaro.callbackBeforePaymentValidateAndSend = function (event) {
+
+			var payment_type = window.rnw.tamaro.instance.paymentForm.data.payment_type;
+
+			if (payment_type === 'onetime') {
+				window.rnw.tamaro.instance.paymentForm.data.stored_sf_Opportunity_Product__c = window.rnw.tamaro.instance.paymentForm.data.gpch_product;
+				window.rnw.tamaro.instance.paymentForm.data.stored_sf_npe03__Recurring_Donation__c_Product__c = '';
+			}
+
+			if (payment_type === 'recurring') {
+				window.rnw.tamaro.instance.paymentForm.data.stored_sf_npe03__Recurring_Donation__c_Product__c = window.rnw.tamaro.instance.paymentForm.data.gpch_product;
+				window.rnw.tamaro.instance.paymentForm.data.stored_sf_Opportunity_Product__c = '';
+			}
+		}
+
+		window.rnw.tamaro.events.beforePaymentValidateAndSend.subscribe(gpchTamaro.callbackBeforePaymentValidateAndSend);
+
+		gpchTamaro.nextStep = function() {
+
+			rnw.tamaro.instance.config.paymentWidgetBlocks = [
+				'payment_amounts_and_intervals',
+				'payment_payment_methods',
+				'payment_profile',
+				'payment_address',
+				'payment_cover_fee'
+			];
+
+			rnw.tamaro.instance.config.showSubmitButton = true;
+			rnw.tamaro.instance.config.showFooter = true;
+		}
+
+	</script>
+</div>
+
