@@ -69,7 +69,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 
 	// defaultPaymentType
 	$allowedDefaultPaymentTypes = array( 'onetime', 'recurring' );
-	if ( array_key_exists( 'defaultPaymentType', $block_attributes ) && in_array( $block_attributes['defaultRecurringInterval'], $allowedDefaultPaymentTypes ) ) {
+	if ( array_key_exists( 'defaultPaymentType', $block_attributes ) && in_array( $block_attributes['defaultPaymentType'], $allowedDefaultPaymentTypes ) ) {
 		$tamaroAttributes['defaultPaymentType'] = $block_attributes['defaultPaymentType'];
 	} else {
 		$tamaroAttributes['defaultPaymentType'] = $defaultAttributes['defaultPaymentType'];
