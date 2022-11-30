@@ -127,7 +127,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	}
 
 	// salesforceCampaignID
-	if ( array_key_exists( 'salesforceCampaignID', $block_attributes ) && is_string( $block_attributes['minimumCustomAmountOnetime'] ) && ( ! empty( $block_attributes['minimumCustomAmountOnetime'] ) ) ) {
+	if ( array_key_exists( 'salesforceCampaignID', $block_attributes ) && is_string( $block_attributes['salesforceCampaignID'] ) && ( ! empty( $block_attributes['salesforceCampaignID'] ) ) ) {
 		$tamaroAttributes['salesforceCampaignID'] = $block_attributes['salesforceCampaignID'];
 	} else {
 		$tamaroAttributes['salesforceCampaignID'] = $defaultAttributes['salesforceCampaignID'];
