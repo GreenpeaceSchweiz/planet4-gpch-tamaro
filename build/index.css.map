@@ -1,1 +1,0 @@
-{"version":3,"file":"index.css","mappings":";;;AAAA;EACC;EACA;EACA;AACD,C","sources":["webpack://planet4-gpch-tamaro/./src/editor.scss"],"sourcesContent":[".wp-block-planet4-gpch-tamaro-tamaro-widget {\n\tpadding: 2rem;\n\t/* box-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.1); */\n\tborder: #adb2ad solid 1px;\n}\n"],"names":[],"sourceRoot":""}
