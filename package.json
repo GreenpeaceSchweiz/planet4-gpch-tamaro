@@ -1,6 +1,6 @@
 {
 	"name": "planet4-gpch-tamaro",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "A plugin to provide the RaiseNow Tamaro Widget as a configurable block.",
 	"author": "Greenpeace Switzerland",
 	"license": "GPL-2.0-or-later",
