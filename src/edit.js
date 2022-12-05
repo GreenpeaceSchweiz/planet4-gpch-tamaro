@@ -1,4 +1,5 @@
 import {
+	Tip,
 	TextControl,
 	SelectControl,
 	CheckboxControl,
@@ -8,15 +9,22 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...useBlockProps() }>
+			<Tip>
+				The widget will use the default values for the settings, if they
+				are not set here.
+			</Tip>
+			<br />
 			<CheckboxControl
 				label="Debug"
 				checked={ attributes.debug }
 				onChange={ ( val ) => setAttributes( { debug: val } ) }
+				help="Default value: false."
 			/>
 			<CheckboxControl
 				label="Test Mode"
 				checked={ attributes.testMode }
 				onChange={ ( val ) => setAttributes( { testMode: val } ) }
+				help="Default value: false."
 			/>
 			<br />
 			<SelectControl
@@ -33,6 +41,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ label: 'Italian', value: 'it' },
 				] }
 				onChange={ ( val ) => setAttributes( { language: val } ) }
+				help="Default value: en."
 			/>
 			<SelectControl
 				label="Default Payment Type"
@@ -49,6 +58,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( val ) =>
 					setAttributes( { defaultPaymentType: val } )
 				}
+				help="Default value: onetime."
 			/>
 			<SelectControl
 				label="Default Recurring Interval"
@@ -67,6 +77,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( val ) =>
 					setAttributes( { defaultRecurringInterval: val } )
 				}
+				help="Default value: monthly."
 			/>
 
 			<TextControl
@@ -77,13 +88,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						minimumCustomAmountOnetime: parseInt( val ),
 					} )
 				}
-				help="Minimum custom amount which can be set on the form for onetime donations."
+				help="Minimum custom amount which can be set on the form for onetime donations. Default value: 1."
 			/>
 			<TextControl
 				label="Amounts Onetime"
 				value={ attributes.amountsOnetime }
 				onChange={ ( val ) => setAttributes( { amountsOnetime: val } ) }
-				help="Predefined amounts which appear on the form for onetime donations (comma separated list, example: 39,84,150,250)."
+				help="Predefined amounts which appear on the form for onetime donations (comma separated list, example: 10,20,30,40). Default value: 39,84,150,250."
 			/>
 			<TextControl
 				label="Minimum Custom Amount Recurring (monthly)"
@@ -93,7 +104,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						minimumCustomAmountRecurringMonthly: parseInt( val ),
 					} )
 				}
-				help="Minimum custom amount which can be set on the form for monthly recurring donations."
+				help="Minimum custom amount which can be set on the form for monthly recurring donations. Default value: 2."
 			/>
 			<TextControl
 				label="Amounts Recurring (monthly)"
@@ -101,7 +112,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( val ) =>
 					setAttributes( { amountsRecurringMonthly: val } )
 				}
-				help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 7,10,20,50)."
+				help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 5,10,15,20). Default value: 7,10,20,50."
 			/>
 
 			<TextControl
@@ -110,6 +121,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( val ) =>
 					setAttributes( { salesforceCampaignID: val } )
 				}
+				help="Default value: 701090000005aTcAAI."
 			/>
 			<SelectControl
 				label="Salesforce Product"
@@ -139,6 +151,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( val ) =>
 					setAttributes( { salesforceProduct: val } )
 				}
+				help="Default value: Standard Donation."
 			/>
 		</div>
 	);

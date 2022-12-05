@@ -1,5 +1,24 @@
 .wp-block-planet4-gpch-tamaro-tamaro-widget {
 	padding: 2rem;
-	/* box-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.1); */
 	border: #adb2ad solid 1px;
+}
+
+.wp-block-planet4-gpch-tamaro-tamaro-widget label {
+	font-size: 14px !important;
+	text-transform: none !important;
+}
+
+.wp-block-planet4-gpch-tamaro-tamaro-widget .components-base-control__label,
+.wp-block-planet4-gpch-tamaro-tamaro-widget .components-input-control__label {
+	margin-bottom: 2px !important;
+}
+
+.wp-block-planet4-gpch-tamaro-tamaro-widget .components-base-control__help {
+	font-size: 13px !important;
+	margin-top: -11px !important;
+	margin-bottom: 8px !important;
+}
+
+.wp-block-planet4-gpch-tamaro-tamaro-widget .components-base-control__field {
+	margin-bottom: 12px !important;
 }
