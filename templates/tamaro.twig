@@ -2,7 +2,7 @@
 
 	<div class="rnw-widget-container"></div>
 
-	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"></script>
+	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/v29/widget.js"></script>
 
 	<script>
 		window.rnw.tamaro.runWidget('.rnw-widget-container', {
@@ -23,10 +23,15 @@
 				stored_sf_Opportunity_Product__c: '',
 				stored_sf_npe03__Recurring_Donation__c_Product__c: ''
 			},
-			paymentWidgetBlocks: [
-				'payment_amounts_and_intervals',
-				'slot_gpch_next_step_button'
-			],
+			forceShowBlocks: {
+				payment_amounts_and_intervals: true,
+				slot_gpch_next_step_button: true,
+				payment_purposes: false,
+				payment_payment_methods: false,
+				payment_profile: false,
+				payment_address: false,
+				payment_cover_fee: false
+			},
 			purposes: ['p1'],
 			purposeDetails: {
 				p1: {
@@ -155,13 +160,13 @@
 
 		gpchTamaro.nextStep = function() {
 
-			rnw.tamaro.instance.config.paymentWidgetBlocks = [
-				'payment_amounts_and_intervals',
-				'payment_payment_methods',
-				'payment_profile',
-				'payment_address',
-				'payment_cover_fee'
-			];
+			rnw.tamaro.instance.config.forceShowBlocks = {
+				slot_gpch_next_step_button: false,
+				payment_payment_methods: true,
+				payment_profile: true,
+				payment_address: true,
+				payment_cover_fee: true
+			};
 
 			rnw.tamaro.instance.config.showSubmitButton = true;
 			rnw.tamaro.instance.config.showFooter = true;
