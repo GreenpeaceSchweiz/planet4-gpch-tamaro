@@ -172,6 +172,53 @@
 			rnw.tamaro.instance.config.showFooter = true;
 		}
 
+		// Generate a gp_user_id from the email address
+		async function generate_gp_user_id(email) {
+			function bufferToBase64(buffer) {
+				return btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)));
+			}
+
+			try {
+				const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(email));
+				let hashString = bufferToBase64(hashBuffer);
+				hashString = hashString.replace(/\//g, '');
+				return hashString;
+			} catch (error) {
+				return '';
+			}
+		}
+
+		// DataLayer Event for web analytics
+		window.rnw.tamaro.events["paymentComplete"].subscribe(async function (event) {
+			let donation_type = "Single";
+			donation_frequency = "One-time";
+			if (event.data.api.paymentForm !== null) {
+				if (event.data.api.paymentForm.data.payment_type === "recurring") {
+					donation_type = "Recurring";
+					donation_frequency = event.data.api.paymentForm.data.recurring_interval;
+				}
+			}
+
+
+			const hashed_email = await generate_gp_user_id(event.data.api.paymentForm.data.stored_customer_email);
+
+			if (event.data.api.transactionInfo.epayment_status === "success") {
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push({
+					'event': 'donation_completed',
+					'donation_type': donation_type,
+					'donation_value': event.data.api.transactionInfo.amount,
+					'donation_currency': event.data.api.transactionInfo.currency,
+					'donation_frequency': donation_frequency,
+					'donation_payment_method': event.data.api.transactionInfo.payment_method,
+					'donation_campaign_id': event.data.api.paymentForm.data.stored_campaign_id,
+					'donation_product': event.data.api.paymentForm.data.gpch_product,
+					'donation_transaction_id': event.data.api.transactionInfo.epp_transaction_id,
+					'gp_user_id': hashed_email
+				});
+			}
+		});
+
 	</script>
 </div>
 
