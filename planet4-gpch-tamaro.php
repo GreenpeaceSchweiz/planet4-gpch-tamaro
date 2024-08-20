@@ -40,7 +40,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$defaultAttributes['minimumCustomAmountRecurringSemestral'] = 12;
 	$defaultAttributes['minimumCustomAmountRecurringYearly'] = 24;
 	$defaultAttributes['amountsRecurringMonthly'] = '7,10,20,50';
-	$defaultAttributes['salesforceCampaignID'] = '701090000005aTcAAI';
+	$defaultAttributes['salesforceCampaignID'] = '70109000001JUJIAA4';
 	$defaultAttributes['salesforceProduct'] = 'Standard Donation';
 
 	// Tamaro Attributes
