@@ -121,7 +121,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( val ) =>
 					setAttributes( { salesforceCampaignID: val } )
 				}
-				help="Default value: 701090000005aTcAAI."
+				help="Default value: 70109000001JUJIAA4."
 			/>
 			<SelectControl
 				label="Salesforce Product"
