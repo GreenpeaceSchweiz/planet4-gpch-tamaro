@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Planet4 GPCH Tamaro
  * Description:       A plugin to provide the RaiseNow Tamaro Widget as a configurable block.
- * Version:           1.0.10
+ * Version:           1.0.11
  * Requires at least: 5.9
  * Requires PHP:      7.0
  * Author:            Greenpeace Switzerland
