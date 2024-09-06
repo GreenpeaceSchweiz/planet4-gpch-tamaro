@@ -2,7 +2,7 @@
 
 	<div class="rnw-widget-container"></div>
 
-	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/v29/widget.js"></script>
+	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"></script>
 
 	<script>
 		window.rnw.tamaro.runWidget('.rnw-widget-container', {
@@ -136,6 +136,43 @@
 					"if": "paymentType() == recurring && recurringInterval() == yearly",
 					"then": {{ tamaroAttributes.minimumCustomAmountRecurringYearly }}
 				}
+			],
+			cover_fee_percentage: [
+				/*
+				* one-off
+				* TWINT, Credit Card (Visa, Mastercard), PostFinance (Card, E-Finance), QR-Bill, PayPal
+				* recurring
+				* Credit Card (Visa, Mastercard), PostFinance (Card), Direct Debit (LSV, DD), PayPal
+				*/
+				/* {
+					"if": "paymentMethod() == twint", // TWINT
+					"then": 6
+				},
+				{
+					"if": "paymentMethod() == card", // Credit Card (vis & eca)
+					"then": 7
+				},
+				{
+					"if": "paymentMethod() == pfc", // PostFinance Card
+					"then": 8
+				},
+				{
+					"if": "paymentMethod() == pef", // PostFinance E-Finance
+					"then": 9
+				},
+				{
+					"if": "paymentMethod() == chqr", // QR-Bill
+					"then": 10
+				},
+				{
+					"if": "paymentMethod() == paypal", // PayPal
+					"then": 11
+				},
+				{
+					"if": "paymentMethod() == dd", // DD & LSV
+					"then": 12
+				}, */
+				5
 			]
 		});
 
