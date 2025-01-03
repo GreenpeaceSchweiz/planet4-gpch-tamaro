@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Planet4 GPCH Tamaro
  * Description:       A plugin to provide the RaiseNow Tamaro Widget as a configurable block.
- * Version:           1.0.11
+ * Version:           1.0.12
  * Requires at least: 5.9
  * Requires PHP:      7.0
  * Author:            Greenpeace Switzerland
@@ -12,6 +12,8 @@
  *
  * @package           create-block
  */
+
+include('includes/settings.php');
 
 function create_block_planet4_gpch_tamaro_block_init() {
 	register_block_type( __DIR__ . '/build', array( 'render_callback' => 'planet4_gpch_tamaro_render_callback' ) );
@@ -40,7 +42,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$defaultAttributes['minimumCustomAmountRecurringSemestral'] = 12;
 	$defaultAttributes['minimumCustomAmountRecurringYearly'] = 24;
 	$defaultAttributes['amountsRecurringMonthly'] = '7,10,20,50';
-	$defaultAttributes['salesforceCampaignID'] = '70109000001JUJIAA4';
+    $defaultAttributes['salesforceCampaignID'] = get_option('default_salesforce_campaign_id');
 	$defaultAttributes['salesforceProduct'] = 'Standard Donation';
 
 	// Tamaro Attributes
