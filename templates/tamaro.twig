@@ -154,46 +154,55 @@
 					"then": {{ tamaroAttributes.minimumCustomAmountRecurringYearly }}
 				}
 			],
-			cover_fee_percentage: [
-				/*
-				* one-off
-				* TWINT, Credit Card (Visa, Mastercard), PostFinance (Card, E-Finance), QR-Bill, PayPal
-				* recurring
-				* Credit Card (Visa, Mastercard), PostFinance (Card), Direct Debit (LSV, DD), PayPal
-				*/
-				/* {
+			coverFeePercentage: [
+					{
 					"if": "paymentMethod() == twint", // TWINT
-					"then": 6
+					"then": 2
 				},
 				{
 					"if": "paymentMethod() == card", // Credit Card (vis & eca)
-					"then": 7
-				},
-				{
-					"if": "paymentMethod() == pfc", // PostFinance Card
-					"then": 8
-				},
-				{
-					"if": "paymentMethod() == pef", // PostFinance E-Finance
-					"then": 9
+					"then": 2
 				},
 				{
 					"if": "paymentMethod() == chqr", // QR-Bill
-					"then": 10
+					"then": 0
 				},
 				{
 					"if": "paymentMethod() == paypal", // PayPal
-					"then": 11
+					"then": 2
 				},
 				{
 					"if": "paymentMethod() == dd", // DD & LSV
-					"then": 12
-				}, */
+					"then": 0
+				},
 				5
 			]
 		});
 
 		var gpchTamaro = gpchTamaro || {};
+
+		// The currently selected payment method
+		let tamaroPaymentMethod = null;
+
+		// True if showing the whole form, false if only the first block
+		let tamaroFullForm = false;
+
+		window.rnw.tamaro.events.paymentMethodChanged.subscribe(function (event) {
+			if (tamaroFullForm) {
+				// Hide the cover fees block for payment methods that have 0% fees
+				if (tamaroPaymentMethod === 'chqr' || tamaroPaymentMethod === 'dd') {
+					rnw.tamaro.instance.config.forceShowBlocks = {
+						payment_cover_fee: false
+					};
+				}
+				else {
+					rnw.tamaro.instance.config.forceShowBlocks = {
+						payment_cover_fee: true
+					};
+				}
+
+			}
+		});
 
 		gpchTamaro.callbackBeforePaymentValidateAndSend = function (event) {
 
@@ -213,6 +222,7 @@
 		window.rnw.tamaro.events.beforePaymentValidateAndSend.subscribe(gpchTamaro.callbackBeforePaymentValidateAndSend);
 
 		gpchTamaro.nextStep = function() {
+			tamaroFullForm = true;
 
 			rnw.tamaro.instance.config.forceShowBlocks = {
 				slot_gpch_next_step_button: false,
