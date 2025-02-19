@@ -214,6 +214,22 @@
 			}
 
 			if (payment_type === 'recurring') {
+				if (typeof event.data.api.paymentForm.data.exp !== "undefined" && event.data.api.paymentForm.data.exp !== "") {
+					const exp_date = event.data.api.paymentForm.data.exp;
+					const [exp_month, exp_year] = exp_date.split("/").map(Number);
+
+					// Assume the year is in 2000s
+					const full_year = 2000 + exp_year;
+
+					// Get the last day of the given month
+					const last_day = new Date(full_year, exp_month, 0).getDate();
+
+					// Format as YYYY-MM-DD
+					formatted_exp_date = `${full_year}-${String(exp_month).padStart(2, "0")}-${last_day}`;
+
+					window.rnw.tamaro.instance.paymentForm.data.stored_sf_npe03__Recurring_Donation__c_CC_Exp__c = formatted_exp_date;
+				}
+
 				window.rnw.tamaro.instance.paymentForm.data.stored_sf_npe03__Recurring_Donation__c_Product__c = window.rnw.tamaro.instance.paymentForm.data.gpch_product;
 				window.rnw.tamaro.instance.paymentForm.data.stored_sf_Opportunity_Product__c = '';
 			}
