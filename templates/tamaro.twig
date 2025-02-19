@@ -23,6 +23,23 @@
 				stored_sf_Opportunity_Product__c: '',
 				stored_sf_npe03__Recurring_Donation__c_Product__c: ''
 			},
+			paymentMethods: [
+				'twint',
+				'card',
+				{
+					"if": "paymentType() != recurring",
+					"then": [
+						"chqr"
+					]
+				},
+				{
+					"if": "paymentType() == recurring",
+					"then": [
+						"dd"
+					]
+				},
+				'paypal',
+			],
 			forceShowBlocks: {
 				payment_amounts_and_intervals: true,
 				slot_gpch_next_step_button: true,
