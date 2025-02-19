@@ -1,0 +1,133 @@
+{
+	"data": {
+		"create_supporter": false,
+		"supporter": {},
+		"raisenow_parameters": {},
+		"custom_parameters": {},
+		"payment_information": {},
+		"bank_name": "Bank",
+		"stored_sf_Contact_Email_Campaigning__c": false,
+		"stored_sf_Contact_Email_Fundraising__c": true,
+		"stored_customer_email_permission": true,
+		"stored_customer_donation_receipt": true,
+		"stored_sf_Contact_Source__c": "Internet",
+		"gpch_product": "Standard Donation",
+		"payment_type": "recurring",
+		"recurring_interval": "monthly",
+		"purpose": "p1",
+		"currency": "chf",
+		"amount": 5,
+		"stored_campaign_id": "701bH00000IGmODQA1",
+		"preselected_amount": 500,
+		"card_type": "eca",
+		"exp": "06/25",
+		"stored_cover_transaction_fee": false,
+		"last_selected_payment_method": "card",
+		"payment_method": "card",
+		"cardno": "5404000000000001",
+		"cvv": "123",
+		"stored_customer_language": "de",
+		"stored_sf_npe03__Recurring_Donation__c_Product__c": "Standard Donation",
+		"stored_sf_Opportunity_Product__c": ""
+	},
+	"registeredFields": [
+		"amount",
+		"payment_type",
+		"payment_method",
+		"stored_customer_salutation",
+		"stored_customer_firstname",
+		"stored_customer_lastname",
+		"stored_customer_email",
+		"stored_customer_email_permission",
+		"stored_customer_message",
+		"stored_customer_street",
+		"stored_customer_street_number",
+		"stored_customer_street2",
+		"stored_customer_zip_code",
+		"stored_customer_city",
+		"stored_customer_country",
+		"stored_cover_transaction_fee",
+		"cardno",
+		"exp",
+		"cvv"
+	],
+	"touchedFields": [
+		"amount",
+		"payment_type",
+		"payment_method",
+		"stored_customer_salutation",
+		"stored_customer_firstname",
+		"stored_customer_lastname",
+		"stored_customer_email",
+		"stored_customer_email_permission",
+		"stored_customer_message",
+		"stored_customer_street",
+		"stored_customer_street_number",
+		"stored_customer_street2",
+		"stored_customer_zip_code",
+		"stored_customer_city",
+		"stored_customer_country",
+		"stored_cover_transaction_fee",
+		"cardno",
+		"exp",
+		"cvv"
+	],
+	"fieldsInSlots": [],
+	"allValidationErrors": {
+		"stored_customer_salutation": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_firstname": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_lastname": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_email": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_fiscal_code": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_street": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_zip_code": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_city": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_country": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_state": [
+			{
+				"code": "field_is_missing"
+			}
+		],
+		"stored_customer_street_number": [
+			{
+				"code": "field_is_missing"
+			}
+		]
+	}
+}
