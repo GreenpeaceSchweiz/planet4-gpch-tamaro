@@ -38,7 +38,12 @@
 						"dd"
 					]
 				},
-				'paypal',
+				{
+					"if": "paymentType() != recurring",
+					"then": [
+						"paypal"
+					]
+				},
 			],
 			forceShowBlocks: {
 				payment_amounts_and_intervals: true,
