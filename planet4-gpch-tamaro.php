@@ -22,9 +22,6 @@ function create_block_planet4_gpch_tamaro_block_init() {
 add_action( 'init', 'create_block_planet4_gpch_tamaro_block_init' );
 
 function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
-
-	// var_dump($block_attributes);
-
 	$defaultAttributes = array();
 	$tamaroAttributes = array();
 
@@ -157,13 +154,16 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	return \Timber::fetch( __DIR__ . '/templates/tamaro.twig', $params );
 }
 
-function multiplyAmounts (string $commaSeparatedAmounts, int $multiplicator)
+function multiplyAmounts(string $commaSeparatedAmounts, int $multiplicator)
 {
 	$amounts = explode(',', $commaSeparatedAmounts);
 	$multipliedAmounts = array();
 
 	foreach ($amounts as $amount) {
-		$multipliedAmounts[] = $amount * $multiplicator;
+        $amount_int = intval($amount);
+        if ($amount_int > 0) {
+            $multipliedAmounts[] = $amount_int * $multiplicator;
+        }
 	}
 
 	$multipliedCommaSeparatedAmounts = implode(',', $multipliedAmounts);
