@@ -304,6 +304,70 @@
 			}
 		});
 
+
+		// Tracks if an observer was already started
+		let observerStarted = false;
+
+		/**
+		 * Monitors and modifies the content of the widget and modified it in certain conditions:
+		 * - When the subscription info is shown: Moves the unsubscribe section to the bottom
+		 * - When payment methods are changed and the current method is PostFinance: Remove the current method so it
+		 * can't be selected anymore.
+		 */
+		const observeWidgetContent = (event) => {
+			// Node to observe
+			const widgetContentElement = document.querySelector("#tamaro-widget");
+			
+			// Callback to modify the widget content
+			const modifyWidgetContent = (mutationList, observer) => {
+				for (const mutation of mutationList) {
+					if (mutation.type === "childList") {
+						// Look for subscription info sections
+						const sections = document.querySelectorAll("section.subscription-info .main section");
+
+						if (typeof(sections[0]) !== 'undefined' && sections[0].classList.contains('subscription-details')) {
+							// Change element order
+							sections[2].append(sections[0])
+
+							// Adapt styling to new order
+							sections[0].style.borderTopWidth = '1px';
+							sections[0].style.marginTop = '1.25rem';
+							sections[0].style.paddingTop = '1.25rem';
+							sections[1].style.borderTopWidth = '0';
+							sections[1].style.marginTop = '0';
+							sections[1].style.paddingTop = '0';
+						}
+
+						// Look for PostFinance as current payment method
+						const currentMethodElement = document.querySelector("section.update-current-payment-method");
+
+						if (currentMethodElement !== null) {
+							// PostFinance button as current payment method
+							const pfcButton = currentMethodElement.querySelector("button.payment-method.pfc.current");
+
+							if (pfcButton !== null) {
+								currentMethodElement.style.display = 'none';
+							}
+						}
+					}
+				}
+			}
+
+			if (widgetContentElement !== null && observerStarted === false) {
+				// Observer config
+				const config = { attributes: false, childList: true, subtree: true };
+
+				// Create an observer instance linked to the callback function
+				const observer = new MutationObserver(modifyWidgetContent);
+
+				// Start observing the target node for configured mutations
+				observer.observe(widgetContentElement, config);
+
+				observerStarted = true;
+			}
+		}
+		window.rnw.tamaro.events.fetchPaymentDataEnd.subscribe(observeWidgetContent);
+
 	</script>
 </div>
 
