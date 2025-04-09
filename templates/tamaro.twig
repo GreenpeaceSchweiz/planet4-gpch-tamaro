@@ -223,8 +223,8 @@
 					const exp_date = event.data.api.paymentForm.data.exp;
 					const [exp_month, exp_year] = exp_date.split("/").map(Number);
 
-					// Assume the year is in 2000s
-					const full_year = 2000 + exp_year;
+					// exp_year can be yy or yyyy. Add 2000 to a 2 digit year.
+					const full_year = exp_year < 100 ? 2000 + exp_year : exp_year;
 
 					// Get the last day of the given month
 					const last_day = new Date(full_year, exp_month, 0).getDate();
