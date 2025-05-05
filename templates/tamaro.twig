@@ -284,26 +284,45 @@
 				}
 			}
 
-
 			const hashed_email = await generate_gp_user_id(event.data.api.paymentForm.data.stored_customer_email);
 
-			if (event.data.api.transactionInfo.epayment_status === "success") {
-				window.dataLayer = window.dataLayer || [];
-				window.dataLayer.push({
-					'event': 'donation_completed',
-					'donation_type': donation_type,
-					'donation_value': event.data.api.transactionInfo.amount,
-					'donation_currency': event.data.api.transactionInfo.currency,
-					'donation_frequency': donation_frequency,
-					'donation_payment_method': event.data.api.transactionInfo.payment_method,
-					'donation_campaign_id': event.data.api.paymentForm.data.stored_campaign_id,
-					'donation_product': event.data.api.paymentForm.data.gpch_product,
-					'donation_transaction_id': event.data.api.transactionInfo.epp_transaction_id,
-					'gp_user_id': hashed_email
-				});
+			if (typeof event.data.api.transactionInfo !== "undefined") {
+				// Use legacy RaiseNow Manager data
+				if (event.data.api.transactionInfo.epayment_status === "success") {
+					window.dataLayer = window.dataLayer || [];
+					window.dataLayer.push({
+						'event': 'donation_completed',
+						'donation_type': donation_type,
+						'donation_value': event.data.api.paymentForm.data.amount,
+						'donation_currency': event.data.api.paymentForm.data.currency,
+						'donation_frequency': donation_frequency,
+						'donation_payment_method': event.data.api.paymentForm.data.payment_method,
+						'donation_campaign_id': event.data.api.paymentForm.data.stored_campaign_id,
+						'donation_product': event.data.api.paymentForm.data.gpch_product,
+						'donation_transaction_id': event.data.api.transactionInfo.epp_transaction_id,
+						'gp_user_id': hashed_email
+					});
+				}
+			}
+			else if (typeof event.data.api.epmsPaymentInfo !== "undefined") {
+				// Use RaiseNow Hub data
+				if (event.data.api.epmsPaymentInfo.last_status === "succeeded") {
+					window.dataLayer = window.dataLayer || [];
+					window.dataLayer.push({
+						'event': 'donation_completed',
+						'donation_type': donation_type,
+						'donation_value': event.data.api.paymentForm.data.amount,
+						'donation_currency': event.data.api.paymentForm.data.currency,
+						'donation_frequency': donation_frequency,
+						'donation_payment_method': event.data.api.paymentForm.data.payment_method,
+						'donation_campaign_id': event.data.api.paymentForm.data.stored_campaign_id,
+						'donation_product': event.data.api.paymentForm.data.gpch_product,
+						'donation_transaction_id': event.data.api.epmsPaymentInfo.uuid,
+						'gp_user_id': hashed_email
+					});
+				}
 			}
 		});
-
 
 		// Tracks if an observer was already started
 		let observerStarted = false;
