@@ -13,6 +13,8 @@
  * @package           create-block
  */
 
+use Timber\Timber;
+
 include('includes/settings.php');
 
 function create_block_planet4_gpch_tamaro_block_init() {
@@ -151,7 +153,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$params = array( 'tamaroAttributes' => $tamaroAttributes );
 
 	// output template
-	return \Timber::fetch( __DIR__ . '/templates/tamaro.twig', $params );
+	return Timber::compile( __DIR__ . '/templates/tamaro.twig', $params );
 }
 
 function multiplyAmounts(string $commaSeparatedAmounts, int $multiplicator)
