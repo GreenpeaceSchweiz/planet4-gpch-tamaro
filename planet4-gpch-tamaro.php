@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Planet4 GPCH Tamaro
  * Description:       A plugin to provide the RaiseNow Tamaro Widget as a configurable block.
- * Version:           1.0.18
+ * Version:           1.0.19
  * Requires at least: 5.9
  * Requires PHP:      7.0
  * Author:            Greenpeace Switzerland
@@ -12,6 +12,8 @@
  *
  * @package           create-block
  */
+
+use Timber\Timber;
 
 include('includes/settings.php');
 
@@ -151,7 +153,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$params = array( 'tamaroAttributes' => $tamaroAttributes );
 
 	// output template
-	return \Timber::fetch( __DIR__ . '/templates/tamaro.twig', $params );
+	return Timber::compile( __DIR__ . '/templates/tamaro.twig', $params );
 }
 
 function multiplyAmounts(string $commaSeparatedAmounts, int $multiplicator)
