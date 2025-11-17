@@ -15,12 +15,12 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^30.11.0"
+		"@wordpress/scripts": "^31.0.0"
 	},
 	"jshintConfig": {
 		"esversion": 11
 	},
 	"dependencies": {
-		"@wordpress/components": "^29.4.0"
+		"@wordpress/components": "^30.8.0"
 	}
 }
