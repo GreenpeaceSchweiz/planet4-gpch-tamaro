@@ -40,7 +40,11 @@
 		},
 		"salesforceProduct": {
 			"type": "string"
-		}
+		},
+        "customFields": {
+            "type": "array",
+            "default": []
+      }
 	},
 	"supports": {
 		"html": false

@@ -1,28 +1,47 @@
 .wp-block-planet4-gpch-tamaro-tamaro-widget {
-	padding: 2rem;
-	border: #adb2ad solid 1px;
-}
+  padding: 2rem;
+  border: #adb2ad solid 1px;
 
-.wp-block-planet4-gpch-tamaro-tamaro-widget label {
-	font-size: 14px !important;
-	text-transform: none !important;
-}
+  label {
+    font-size: 14px !important;
+    text-transform: none !important;
+  }
 
-.wp-block-planet4-gpch-tamaro-tamaro-widget .components-base-control__label,
-.wp-block-planet4-gpch-tamaro-tamaro-widget .components-input-control__label {
-	margin-bottom: 2px !important;
-}
+  .components-base-control__label,
+  .components-input-control__label {
+    margin-bottom: 2px !important;
+  }
 
-.wp-block-planet4-gpch-tamaro-tamaro-widget .components-base-control__help {
-	font-size: 13px !important;
-	margin-top: -11px !important;
-	margin-bottom: 8px !important;
-}
+  .components-base-control__help {
+    font-size: 13px !important;
+    margin-top: -11px !important;
+    margin-bottom: 8px !important;
+  }
 
-.wp-block-planet4-gpch-tamaro-tamaro-widget .components-base-control__field {
-	margin-bottom: 12px !important;
-}
+  .components-base-control__field {
+    margin-bottom: 12px !important;
+  }
 
-.wp-block-planet4-gpch-tamaro-tamaro-widget .components-select-control {
-	gap: 0 !important;
+  .components-select-control {
+    gap: 0 !important;
+  }
+
+  .components-panel__header h2:after,
+  .components-panel__body h2:after {
+    display: none !important;
+  }
+
+  .components-panel__row p {
+    font-size: 16px !important;
+  }
+
+  .components-panel__row.custom-field-controls {
+    margin: 8px;
+    justify-content: left;
+    gap: 12px;
+
+      p {
+        margin: 0;
+      }
+  }
 }
