@@ -35,13 +35,16 @@
     font-size: 16px !important;
   }
 
-  .components-panel__row.custom-field-controls {
+  .components-panel__row {
     margin: 8px;
-    justify-content: left;
-    gap: 12px;
+
+    &.custom-field-controls {
+      justify-content: left;
+      gap: 12px;
 
       p {
         margin: 0;
       }
+    }
   }
 }

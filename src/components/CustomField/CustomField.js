@@ -48,7 +48,7 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
     };
 
     // Only show options UI for select / checkbox
-    const hasOptions = fieldType === 'select' || fieldType === 'checkbox';
+    const hasOptions = fieldType === 'select';
 
     // Simple sanitizing: only lowercase letters and underscores
     const handleFieldNameChange = (val) => {
@@ -96,7 +96,7 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
                     {label: 'Single line text', value: 'text'},
                     {label: 'Multi line text', value: 'textarea'},
                     {label: 'Select field', value: 'select'},
-                    {label: 'Checkbox', value: 'checkbox'},
+                    {label: 'Checkbox', value: 'checkbox-group'},
                 ]}
                 onChange={(val) => updateField({fieldType: val})}
                 __next40pxDefaultSize

@@ -1,9 +1,12 @@
 import {
     Tip,
     TextControl,
+    TextareaControl,
     SelectControl,
     CheckboxControl,
-    Button, Panel, PanelRow
+    ToggleControl,
+    Button, Panel, PanelBody, PanelRow,
+    __experimentalDivider as Divider,
 } from '@wordpress/components';
 import {useBlockProps} from '@wordpress/block-editor';
 import CustomField from "./components/CustomField/CustomField";
@@ -13,7 +16,6 @@ const MAX_FIELDS = 5;
 
 export default function Edit({attributes, setAttributes}) {
     const {
-        customFields = [],
         debug,
         testMode,
         language,
@@ -25,6 +27,10 @@ export default function Edit({attributes, setAttributes}) {
         amountsRecurringMonthly,
         salesforceCampaignID,
         salesforceProduct,
+        useCustomFields,
+        customFieldsSectionTitle,
+        customFieldsSectionText,
+        customFields = [],
     } = attributes;
 
     const addCustomField = () => {
@@ -202,38 +208,75 @@ export default function Edit({attributes, setAttributes}) {
                 help="Default value: Standard Donation."
             />
 
-            <Panel header="Custom Fields">
+
+            <Panel header="Custom Fields" initialOpen={false}>
                 <PanelRow className="custom-field-controls">
                     <p>Custom fields can be used to add additional information to the donation form. The collected
                         information will only be transferred to RaiseNow, but not to Salesforce.</p>
                 </PanelRow>
 
-                {customFields.map((field, index) => (
-                    <CustomField
-                        key={index}
-                        index={index}
-                        field={field}
-                        onChange={(newField) => updateCustomField(index, newField)}
-                        onRemove={() => removeCustomField(index)}
-                        canRemove={customFields.length > MIN_FIELDS}
+                <PanelRow>
+                    <ToggleControl
+                        label="Use Custom Fields"
+                        checked={useCustomFields}
+                        onChange={(val) => setAttributes({useCustomFields: val})}
                     />
-                ))}
-
-                <PanelRow className="custom-field-controls">
-                    <Button
-                        variant="primary"
-                        onClick={addCustomField}
-                        disabled={customFields.length >= MAX_FIELDS}
-                        __next40pxDefaultSize
-                        className="add-custom-field-button"
-                    >
-                        Add custom field
-                    </Button>
-
-                    <p className="custom-field-count">
-                        {customFields.length} / {MAX_FIELDS} custom fields
-                    </p>
                 </PanelRow>
+
+                {useCustomFields && (
+                    <>
+                        <Divider />
+
+                        <PanelRow>
+                            <TextControl
+                                label="Section title"
+                                value={customFieldsSectionTitle}
+                                onChange={(val) =>
+                                    setAttributes({customFieldsSectionTitle: val})
+                                }
+                                help="Title of the section containing the custom fields."
+                            />
+                        </PanelRow>
+
+                        <PanelRow>
+                            <TextareaControl
+                                label="Description"
+                                help="Enter additional text to show (optional)."
+                                value={customFieldsSectionText}
+                                onChange={(val) =>
+                                    setAttributes({customFieldsSectionText: val})
+                                }
+                            />
+                        </PanelRow>
+
+                        {customFields.map((field, index) => (
+                            <CustomField
+                                key={index}
+                                index={index}
+                                field={field}
+                                onChange={(newField) => updateCustomField(index, newField)}
+                                onRemove={() => removeCustomField(index)}
+                                canRemove={customFields.length > MIN_FIELDS}
+                            />
+                        ))}
+
+                        <PanelRow className="custom-field-controls">
+                            <Button
+                                variant="primary"
+                                onClick={addCustomField}
+                                disabled={customFields.length >= MAX_FIELDS}
+                                __next40pxDefaultSize
+                                className="add-custom-field-button"
+                            >
+                                Add custom field
+                            </Button>
+
+                            <p className="custom-field-count">
+                                {customFields.length} / {MAX_FIELDS} custom fields
+                            </p>
+                        </PanelRow>
+                    </>
+                )}
             </Panel>
         </div>
     );

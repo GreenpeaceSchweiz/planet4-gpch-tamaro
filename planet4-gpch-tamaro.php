@@ -149,6 +149,12 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 		$tamaroAttributes['salesforceProduct'] = $defaultAttributes['salesforceProduct'];
 	}
 
+	// Custom Fields
+	$tamaroAttributes['useCustomFields'] = $block_attributes['useCustomFields'] ?? false;
+	$tamaroAttributes['customFieldsSectionTitle'] = $block_attributes['customFieldsSectionTitle'] ?? '';
+	$tamaroAttributes['customFieldsSectionText'] = $block_attributes['customFieldsSectionText'] ?? '';
+	$tamaroAttributes['customFields'] = $block_attributes['customFields'] ?? [];
+
 	// prepare parameters for template
 	$params = array( 'tamaroAttributes' => $tamaroAttributes );
 

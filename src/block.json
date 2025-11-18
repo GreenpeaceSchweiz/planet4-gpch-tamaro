@@ -41,6 +41,15 @@
 		"salesforceProduct": {
 			"type": "string"
 		},
+        "useCustomFields": {
+            "type": "boolean"
+        },
+        "customFieldsSectionTitle": {
+            "type": "string"
+        },
+        "customFieldsSectionText": {
+            "type": "string"
+        },
         "customFields": {
             "type": "array",
             "default": []

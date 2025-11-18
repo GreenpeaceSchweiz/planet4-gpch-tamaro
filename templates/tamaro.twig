@@ -47,12 +47,13 @@
 			],
 			forceShowBlocks: {
 				payment_amounts_and_intervals: true,
+                slot_custom_fields: true,
 				slot_gpch_next_step_button: true,
 				payment_purposes: false,
 				payment_payment_methods: false,
 				payment_profile: false,
 				payment_address: false,
-				payment_cover_fee: false
+				payment_cover_fee: false,
 			},
 			purposes: ['p1'],
 			purposeDetails: {
@@ -70,7 +71,66 @@
 							text_html: "gpch_next_step_button"
 						}]
 					}]
-				}]
+				}],
+                {% if tamaroAttributes.useCustomFields %}
+                slot_custom_fields: [
+                    {
+                        component: 'block',
+                        children: [
+                            {
+                                component: 'block_header',
+                                title: '{{ tamaroAttributes.customFieldsSectionTitle|escape('js') }}',
+                            },
+                            {
+                                component: 'block_content',
+                                children: [
+                                    {
+                                        component: 'content',
+                                        text_html: 'custom_fields_text', // Only works with a translation key, actual text is inserted as translation.
+                                    },
+                                    {% for field in tamaroAttributes.customFields %}
+                                    {% if field.fieldType == 'checkbox-group' %}
+                                    {
+                                        component: 'field',
+                                        type: 'checkbox-group',
+                                        inline: false,
+                                        name: 'stored_{{ field.fieldName }}',
+                                        
+                                        children: [
+                                            {
+                                                component: 'field',
+                                                type: 'checkbox-in-group',
+                                                name: 'stored_{{ field.fieldName }}',
+                                                value: '{{ field.fieldLabel|escape('js') }}',
+                                                text: '{{ field.fieldLabel|escape('js') }}',
+                                            },
+                                        ],
+                                    },
+                                    {% else %}
+                                    {
+                                        component: 'field',
+                                        type: '{{ field.fieldType }}',
+                                        name: 'stored_{{ field.fieldName }}',
+                                        label: '{{ field.fieldLabel|escape('js') }}',
+                                        {% if field.fieldType == 'select' or field.fieldType == 'checkbox' %}
+                                        options: [
+                                            {% for option in field.options %}
+                                            {
+                                                value: '{{ option|escape('js') }}',
+                                                label: '{{ option|escape('js') }}',
+                                            },
+                                            {% endfor %}
+                                        ],
+                                        {% endif %}
+                                    },
+                                    {% endif %}
+                                    {% endfor %}
+                                ],
+                            },
+                        ],
+                    },
+                ],
+                {% endif %}
 			},
 			translations: {
 				en: {
@@ -82,8 +142,9 @@
 							email_permission_info_html: "<p>I would like Greenpeace Switzerland to inform me by e-mail about ongoing projects.</p>\n"
 						}
 					},
-					gpch_next_step_button: '<button type="button" class="btn btn-block btn-primary" onClick="gpchTamaro.nextStep()"><span class="btn-text">Next Step</span></button>'
-				},
+					gpch_next_step_button: '<button type="button" class="btn btn-block btn-primary" onClick="gpchTamaro.nextStep()"><span class="btn-text">Next Step</span></button>',
+                    custom_fields_text: '{{ tamaroAttributes.customFieldsSectionText|escape('js') }}',
+                },
 				de: {
 					purposes: {
 						p1: 'Greenpeace Schweiz'
@@ -246,11 +307,12 @@
 			tamaroFullForm = true;
 
 			rnw.tamaro.instance.config.forceShowBlocks = {
+                slot_custom_fields: true,
 				slot_gpch_next_step_button: false,
 				payment_payment_methods: true,
 				payment_profile: true,
 				payment_address: true,
-				payment_cover_fee: true
+				payment_cover_fee: true,
 			};
 
 			rnw.tamaro.instance.config.showSubmitButton = true;
@@ -336,7 +398,7 @@
 		const observeWidgetContent = (event) => {
 			// Node to observe
 			const widgetContentElement = document.querySelector("#tamaro-widget");
-			
+
 			// Callback to modify the widget content
 			const modifyWidgetContent = (mutationList, observer) => {
 				for (const mutation of mutationList) {
