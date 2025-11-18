@@ -47,12 +47,13 @@
 			],
 			forceShowBlocks: {
 				payment_amounts_and_intervals: true,
+                slot_custom_fields: true,
 				slot_gpch_next_step_button: true,
 				payment_purposes: false,
 				payment_payment_methods: false,
 				payment_profile: false,
 				payment_address: false,
-				payment_cover_fee: false
+				payment_cover_fee: false,
 			},
 			purposes: ['p1'],
 			purposeDetails: {
@@ -70,7 +71,49 @@
 							text_html: "gpch_next_step_button"
 						}]
 					}]
-				}]
+				}],
+                slot_custom_fields: [
+                    {
+                        component: 'block',
+                        children: [
+                            {
+                                component: 'block_header',
+                                title: 'Angaben zu deinem Geschenk',
+                            },
+                            {
+                                component: 'block_content',
+                                children: [
+                                    {
+                                        component: 'content',
+                                        text_html: 'Bitte gib hier deine Tshirt-Grösse an.', // <-- translation key
+                                    },{
+                                        component: 'content',
+                                        text_html: 'custom_field_text', // <-- translation key
+                                    },{
+                                        component: 'field',
+                                        type: 'select', // <-- or 'textarea', 'date'
+                                        name: 'stored_custom_text_field', // <-- field name
+                                        label: 'T-Shirt Grösse', // <-- translation key, which is used for a field label
+                                        // placeholder: 'payment_form.stored_custom_text_field', // <-- translation key, which is used for a field placeholder (optional)
+                                        // infoToggleTitle: 'payment_form.stored_custom_text_field_info_toggle_title', // <-- translation key, which is used for a info-icon aria-label (optional)
+                                        // infoToggleTextHTML: 'payment_form.stored_custom_text_field_info_toggle_text_html', // <-- translation key, which is used for an expandable HTML content (optional)
+                                        options: [
+                                            {
+                                                value: 'S',
+                                                label: 'Grösse S',
+                                            },
+                                            {
+                                                value: 'M',
+                                                label: 'Grösse M',
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+
+                    ],
 			},
 			translations: {
 				en: {
@@ -82,8 +125,9 @@
 							email_permission_info_html: "<p>I would like Greenpeace Switzerland to inform me by e-mail about ongoing projects.</p>\n"
 						}
 					},
-					gpch_next_step_button: '<button type="button" class="btn btn-block btn-primary" onClick="gpchTamaro.nextStep()"><span class="btn-text">Next Step</span></button>'
-				},
+					gpch_next_step_button: '<button type="button" class="btn btn-block btn-primary" onClick="gpchTamaro.nextStep()"><span class="btn-text">Next Step</span></button>',
+                    custom_field_text: '<p>Bitte gib hier deine T-Shirt Grösse an.</p>',
+                },
 				de: {
 					purposes: {
 						p1: 'Greenpeace Schweiz'
@@ -246,11 +290,12 @@
 			tamaroFullForm = true;
 
 			rnw.tamaro.instance.config.forceShowBlocks = {
+                slot_custom_fields: true,
 				slot_gpch_next_step_button: false,
 				payment_payment_methods: true,
 				payment_profile: true,
 				payment_address: true,
-				payment_cover_fee: true
+				payment_cover_fee: true,
 			};
 
 			rnw.tamaro.instance.config.showSubmitButton = true;
