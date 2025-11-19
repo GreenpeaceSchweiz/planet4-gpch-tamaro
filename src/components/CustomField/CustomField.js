@@ -1,5 +1,5 @@
 import {__, sprintf} from '@wordpress/i18n';
-import {PanelBody, Button, SelectControl, TextControl} from '@wordpress/components';
+import {PanelBody, Button, SelectControl, TextControl, CheckboxControl} from '@wordpress/components';
 
 const MIN_OPTIONS = 1;
 const MAX_OPTIONS = 15;
@@ -9,6 +9,7 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
         fieldType,
         fieldLabel,
         fieldName,
+        isRequired = false,
         options = [''],
     } = field;
 
@@ -49,6 +50,9 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
 
     // Only show options UI for select / checkbox
     const hasOptions = fieldType === 'select';
+
+    // Fields that can be set to required
+    const canBeRequired = fieldType === 'text' || fieldType === 'textarea';
 
     // Simple sanitizing: only lowercase letters and underscores
     const handleFieldNameChange = (val) => {
@@ -122,6 +126,15 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
                     'planet4-gpch-tamaro'
                 )}
             />
+
+            {canBeRequired && (
+                <CheckboxControl
+                    label={__('Required field', 'planet4-gpch-tamaro')}
+                    checked={isRequired}
+                    onChange={(val) => updateField({isRequired: val})}
+                    help={__('The form can not be submitted without filling in this field.', 'planet4-gpch-tamaro')}
+                />
+            )}
 
             {hasOptions && (
                 <>

@@ -95,7 +95,7 @@
                                         type: 'checkbox-group',
                                         inline: false,
                                         name: 'stored_{{ field.fieldName }}',
-                                        
+
                                         children: [
                                             {
                                                 component: 'field',
@@ -132,6 +132,19 @@
                 ],
                 {% endif %}
 			},
+            paymentValidations: {
+                {% if tamaroAttributes.useCustomFields %}
+                {% for field in tamaroAttributes.customFields %}
+                {% if field.fieldType == 'text' or field.fieldType == 'textarea' %}
+                {% if field.isRequired %}
+                stored_{{ field.fieldName }}: {
+                    required: true
+                },
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            },
 			translations: {
 				en: {
 					purposes: {
