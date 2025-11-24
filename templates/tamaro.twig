@@ -47,7 +47,11 @@
 			],
 			forceShowBlocks: {
 				payment_amounts_and_intervals: true,
+                {%  if tamaroAttributes.customFieldsPlacement == 'end' %}
+                slot_custom_fields: false,
+                {% else %}
                 slot_custom_fields: true,
+                {% endif %}
 				slot_gpch_next_step_button: true,
 				payment_purposes: false,
 				payment_payment_methods: false,
@@ -61,6 +65,27 @@
 					stored_campaign_id: '{{ tamaroAttributes.salesforceCampaignID }}'
 				}
 			},
+            blocksOrder: [
+                {%  if tamaroAttributes.customFieldsPlacement == 'beginning' %}
+                'slot_custom_fields',
+                {% endif %}
+                'payment_purposes',
+                'payment_amounts_and_intervals',
+                {%  if tamaroAttributes.customFieldsPlacement == 'after-amount' %}
+                'slot_custom_fields',
+                {% endif %}
+                'slot_gpch_next_step_button',
+                'payment_payment_methods',
+                'payment_profile',
+                'payment_profile_short',
+                'payment_address',
+                'payment_email_permission',
+                'payment_cover_fee',
+                'payment_sepa_mandate_terms',
+                {%  if tamaroAttributes.customFieldsPlacement == 'end' %}
+                'slot_custom_fields',
+                {% endif %}
+            ],
 			slots: {
 				slot_gpch_next_step_button: [{
 					component: "block",

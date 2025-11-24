@@ -30,6 +30,7 @@ export default function Edit({attributes, setAttributes}) {
         useCustomFields,
         customFieldsSectionTitle,
         customFieldsSectionText,
+        customFieldsPlacement,
         customFields = [],
     } = attributes;
 
@@ -175,7 +176,7 @@ export default function Edit({attributes, setAttributes}) {
                 onChange={(val) =>
                     setAttributes({salesforceCampaignID: val})
                 }
-                help="Default value: 70109000001JUJIAA4."
+                help="Uses a default value if not set. The default value can be set in plugin options."
             />
             <SelectControl
                 label="Salesforce Product"
@@ -226,6 +227,21 @@ export default function Edit({attributes, setAttributes}) {
                 {useCustomFields && (
                     <>
                         <Divider />
+
+                        <PanelRow>
+                            <SelectControl
+                                label="Custom Fields Placement"
+                                value={customFieldsPlacement}
+                                options={[
+                                    {label: 'Beginning of form', value: 'beginning'},
+                                    {label: 'After amount', value: 'after-amount'},
+                                    {label: 'End of form', value: 'end'}
+                                ]}
+                                onChange={(val) => setAttributes({customFieldsPlacement: val})}
+                                help="Select where to place the custom fields in the form."
+                            />
+                        </PanelRow>
+
 
                         <PanelRow>
                             <TextControl
