@@ -1,5 +1,6 @@
 import {__, sprintf} from '@wordpress/i18n';
 import {PanelBody, Button, SelectControl, TextControl, CheckboxControl} from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 const MIN_OPTIONS = 1;
 const MAX_OPTIONS = 15;
@@ -12,6 +13,8 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
         isRequired = false,
         options = [''],
     } = field;
+
+    const [fieldNameTouched, setFieldNameTouched] = useState(!!fieldName);
 
     // Make sure there is always at least one option
     const normalizedOptions = options.length ? options : [''];
@@ -54,10 +57,30 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
     // Fields that can be set to required
     const canBeRequired = fieldType === 'text' || fieldType === 'textarea';
 
-    // Simple sanitizing: only lowercase letters and underscores
+    const slugifyFieldName = (value) =>
+        value
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, '_')     // spaces -> underscores
+            .replace(/[^a-z_]/g, ''); // only a–z and _
+
+    const handleFieldLabelChange = (val) => {
+        const patch = { fieldLabel: val };
+
+        // only auto-fill name if user hasn't manually edited it
+        if (!fieldNameTouched || !fieldName) {
+            patch.fieldName = slugifyFieldName(val);
+        }
+
+        updateField(patch);
+    };
+
     const handleFieldNameChange = (val) => {
-        const sanitized = val.toLowerCase().replace(/[^a-z_]/g, '');
-        updateField({fieldName: sanitized});
+        // user is now controlling this field
+        setFieldNameTouched(true);
+
+        const sanitized = slugifyFieldName(val);
+        updateField({ fieldName: sanitized });
     };
 
     // Title: "Custom field X" if name empty, otherwise the field name
@@ -110,7 +133,7 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
             <TextControl
                 label="Field Label"
                 value={fieldLabel}
-                onChange={(val) => updateField({fieldLabel: val})}
+                onChange={ handleFieldLabelChange }
                 help={__(
                     'The label of the custom field which will be displayed to the user. Example: T-Shirt Size',
                     'planet4-gpch-tamaro'
