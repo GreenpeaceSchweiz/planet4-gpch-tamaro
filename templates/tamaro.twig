@@ -46,10 +46,12 @@
 				},
 			],
 			showBlocks: {
-                {%  if tamaroAttributes.customFieldsPlacement == 'end' %}
-                slot_custom_fields: false,
-                {% else %}
-                slot_custom_fields: true,
+                {% if tamaroAttributes.useCustomFields %}
+                    {%  if tamaroAttributes.customFieldsPlacement == 'end' %}
+                    slot_custom_fields: false,
+                    {% else %}
+                    slot_custom_fields: true,
+                    {% endif %}
                 {% endif %}
 			},
             forceShowBlocks: {
@@ -68,12 +70,12 @@
 				}
 			},
             blocksOrder: [
-                {%  if tamaroAttributes.customFieldsPlacement == 'beginning' %}
+                {%  if tamaroAttributes.useCustomFields and tamaroAttributes.customFieldsPlacement == 'beginning' %}
                 'slot_custom_fields',
                 {% endif %}
                 'payment_purposes',
                 'payment_amounts_and_intervals',
-                {%  if tamaroAttributes.customFieldsPlacement == 'after-amount' %}
+                {%  if tamaroAttributes.useCustomFields and tamaroAttributes.customFieldsPlacement == 'after-amount' %}
                 'slot_custom_fields',
                 {% endif %}
                 'slot_gpch_next_step_button',
@@ -84,7 +86,7 @@
                 'payment_email_permission',
                 'payment_cover_fee',
                 'payment_sepa_mandate_terms',
-                {%  if tamaroAttributes.customFieldsPlacement == 'end' %}
+                {%  if tamaroAttributes.useCustomFields and tamaroAttributes.customFieldsPlacement == 'end' %}
                 'slot_custom_fields',
                 {% endif %}
             ],
