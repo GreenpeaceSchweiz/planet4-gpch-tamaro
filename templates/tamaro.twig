@@ -45,20 +45,22 @@
 					]
 				},
 			],
-			forceShowBlocks: {
-				payment_amounts_and_intervals: true,
+			showBlocks: {
                 {%  if tamaroAttributes.customFieldsPlacement == 'end' %}
                 slot_custom_fields: false,
                 {% else %}
                 slot_custom_fields: true,
                 {% endif %}
-				slot_gpch_next_step_button: true,
-				payment_purposes: false,
-				payment_payment_methods: false,
-				payment_profile: false,
-				payment_address: false,
-				payment_cover_fee: false,
 			},
+            forceShowBlocks: {
+                payment_amounts_and_intervals: true,
+                slot_gpch_next_step_button: true,
+                payment_purposes: false,
+                payment_payment_methods: false,
+                payment_profile: false,
+                payment_address: false,
+                payment_cover_fee: false,
+            },
 			purposes: ['p1'],
 			purposeDetails: {
 				p1: {
@@ -344,8 +346,10 @@
 		gpchTamaro.nextStep = function() {
 			tamaroFullForm = true;
 
-			rnw.tamaro.instance.config.forceShowBlocks = {
+            rnw.tamaro.instance.config.showBlocks = {
                 slot_custom_fields: true,
+            };
+			rnw.tamaro.instance.config.forceShowBlocks = {
 				slot_gpch_next_step_button: false,
 				payment_payment_methods: true,
 				payment_profile: true,
