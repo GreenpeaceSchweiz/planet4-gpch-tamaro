@@ -40,7 +40,24 @@
 		},
 		"salesforceProduct": {
 			"type": "string"
-		}
+		},
+        "useCustomFields": {
+            "type": "boolean"
+        },
+        "customFieldsPlacement": {
+          "type": "string",
+          "default": "beginning"
+        },
+        "customFieldsSectionTitle": {
+            "type": "string"
+        },
+        "customFieldsSectionText": {
+            "type": "string"
+        },
+        "customFields": {
+            "type": "array",
+            "default": []
+      }
 	},
 	"supports": {
 		"html": false

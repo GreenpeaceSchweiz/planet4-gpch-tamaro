@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Planet4 GPCH Tamaro
  * Description:       A plugin to provide the RaiseNow Tamaro Widget as a configurable block.
- * Version:           1.0.19
+ * Version:           1.0.20
  * Requires at least: 5.9
  * Requires PHP:      7.0
  * Author:            Greenpeace Switzerland
@@ -148,6 +148,13 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	} else {
 		$tamaroAttributes['salesforceProduct'] = $defaultAttributes['salesforceProduct'];
 	}
+
+	// Custom Fields
+	$tamaroAttributes['useCustomFields'] = $block_attributes['useCustomFields'] ?? false;
+	$tamaroAttributes['customFieldsPlacement'] = $block_attributes['customFieldsPlacement'] ?? false;
+	$tamaroAttributes['customFieldsSectionTitle'] = $block_attributes['customFieldsSectionTitle'] ?? '';
+	$tamaroAttributes['customFieldsSectionText'] = $block_attributes['customFieldsSectionText'] ?? '';
+	$tamaroAttributes['customFields'] = $block_attributes['customFields'] ?? [];
 
 	// prepare parameters for template
 	$params = array( 'tamaroAttributes' => $tamaroAttributes );
