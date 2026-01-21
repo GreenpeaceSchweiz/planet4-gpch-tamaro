@@ -1,30 +1,26 @@
 :root {
-	--tamaro-primary-color: #333333;
-	--tamaro-primary-color__hover: #777777;
-	--tamaro-primary-bg-color: #f2f2fb;
+    --tamaro-primary-color: #333333;
+    --tamaro-primary-color__hover: #777777;
+    --tamaro-primary-bg-color: #f2f2fb;
 }
 
 .rnw-widget-container {
-	width: 100%;
-	max-width: 37.5rem;
-	/* margin: 0 auto; */
+    width: 100%;
+    max-width: 37.5rem;
+    /* margin: 0 auto; */
 }
 
 #tamaro-widget.tamaro-widget {
-	padding: 2rem;
-	box-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    box-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.1);
+
+    .widget-block.slot_gpch_next_step_button button {
+        font-size: 1.125rem;
+        min-height: 4rem;
+    }
 }
 
 #tamaro-widget.tamaro-widget .error-widget,
 body.tamaro-widget-overlay-inner.tamaro-widget-overlay-shown #tamaro-widget.tamaro-widget .overlay-block-wrapper {
-	margin: -2rem;
-}
-
-#tamaro-widget.tamaro-widget .widget-custom-content {
-	margin-top: 3.2rem !important;
-}
-
-#tamaro-widget.tamaro-widget .widget-block.slot_gpch_next_step_button button {
-	font-size: 1.125rem;
-	min-height: 4rem;
+    margin: -2rem;
 }
