@@ -280,7 +280,7 @@
 					"then": 2
 				},
 				{
-					"if": "paymentMethod() == dd", // DD & LSV
+					"if": "paymentMethod() == direct_debit", // DD & LSV
 					"then": 0
 				},
 				5
@@ -296,9 +296,11 @@
 		let tamaroFullForm = false;
 
 		window.rnw.tamaro.events.paymentMethodChanged.subscribe(function (event) {
+			tamaroPaymentMethod = event.data.api.paymentForm.data.payment_method;
+
 			if (tamaroFullForm) {
 				// Hide the cover fees block for payment methods that have 0% fees
-				if (tamaroPaymentMethod === 'chqr' || tamaroPaymentMethod === 'dd') {
+				if (tamaroPaymentMethod === 'chqr' || tamaroPaymentMethod === 'direct_debit') {
 					rnw.tamaro.instance.config.forceShowBlocks = {
 						payment_cover_fee: false
 					};
