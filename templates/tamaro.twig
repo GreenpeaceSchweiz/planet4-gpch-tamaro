@@ -298,7 +298,6 @@
 		window.rnw.tamaro.events.paymentMethodChanged.subscribe(function (event) {
 			tamaroPaymentMethod = event.data.api.paymentForm.data.payment_method;
 
-			console.log("changed payment method to " + tamaroPaymentMethod);
 			if (tamaroFullForm) {
 				// Hide the cover fees block for payment methods that have 0% fees
 				if (tamaroPaymentMethod === 'chqr' || tamaroPaymentMethod === 'direct_debit') {
