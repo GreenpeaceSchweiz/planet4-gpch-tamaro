@@ -2,7 +2,7 @@
 
 	<div class="rnw-widget-container"></div>
 
-	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"></script>
+	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/migration/widget.js"></script>
 
 	<script>
 		window.rnw.tamaro.runWidget('.rnw-widget-container', {
@@ -26,16 +26,18 @@
 			paymentMethods: [
 				'twint',
 				'card',
+				'apple_pay',
+				'google_pay',
 				{
 					"if": "paymentType() != recurring",
 					"then": [
-						"chqr"
+						"ch_qr_reference"
 					]
 				},
 				{
 					"if": "paymentType() == recurring",
 					"then": [
-						"dd"
+						"direct_debit"
 					]
 				},
 				{
@@ -272,7 +274,7 @@
 					"then": 2
 				},
 				{
-					"if": "paymentMethod() == chqr", // QR-Bill
+					"if": "paymentMethod() == ch_qr_reference", // QR-Bill
 					"then": 0
 				},
 				{
@@ -300,7 +302,7 @@
 
 			if (tamaroFullForm) {
 				// Hide the cover fees block for payment methods that have 0% fees
-				if (tamaroPaymentMethod === 'chqr' || tamaroPaymentMethod === 'direct_debit') {
+				if (tamaroPaymentMethod === 'ch_qr_reference' || tamaroPaymentMethod === 'direct_debit') {
 					rnw.tamaro.instance.config.forceShowBlocks = {
 						payment_cover_fee: false
 					};
@@ -394,25 +396,7 @@
 
 			const hashed_email = await generate_gp_user_id(event.data.api.paymentForm.data.stored_customer_email);
 
-			if (typeof event.data.api.transactionInfo !== "undefined") {
-				// Use legacy RaiseNow Manager data
-				if (event.data.api.transactionInfo.epayment_status === "success") {
-					window.dataLayer = window.dataLayer || [];
-					window.dataLayer.push({
-						'event': 'donation_completed',
-						'donation_type': donation_type,
-						'donation_value': event.data.api.paymentForm.data.amount,
-						'donation_currency': event.data.api.paymentForm.data.currency,
-						'donation_frequency': donation_frequency,
-						'donation_payment_method': event.data.api.paymentForm.data.payment_method,
-						'donation_campaign_id': event.data.api.paymentForm.data.stored_campaign_id,
-						'donation_product': event.data.api.paymentForm.data.gpch_product,
-						'donation_transaction_id': event.data.api.transactionInfo.epp_transaction_id,
-						'gp_user_id': hashed_email
-					});
-				}
-			}
-			else if (typeof event.data.api.epmsPaymentInfo !== "undefined") {
+			if (typeof event.data.api.epmsPaymentInfo !== "undefined") {
 				// Use RaiseNow Hub data
 				if (event.data.api.epmsPaymentInfo.last_status === "succeeded") {
 					window.dataLayer = window.dataLayer || [];
