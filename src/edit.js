@@ -68,231 +68,316 @@ export default function Edit({attributes, setAttributes}) {
                 The widget will use the default values for the settings, if they
                 are not set here.
             </Tip>
-            <br/>
-            <CheckboxControl
-                label="Debug"
-                checked={debug}
-                onChange={(val) => setAttributes({debug: val})}
-                help="Default value: false."
-            />
-            <CheckboxControl
-                label="Test Mode"
-                checked={testMode}
-                onChange={(val) => setAttributes({testMode: val})}
-                help="Default value: false."
-            />
-            <br/>
-            <SelectControl
-                label="Language"
-                value={language}
-                options={[
-                    {
-                        label: 'Select an option ...',
-                        value: '',
-                        disabled: false,
-                    },
-                    {label: 'German', value: 'de'},
-                    {label: 'French', value: 'fr'},
-                    {label: 'Italian', value: 'it'},
-                ]}
-                onChange={(val) => setAttributes({language: val})}
-                help="Default value: en."
-            />
-            <SelectControl
-                label="Default Payment Type"
-                value={defaultPaymentType}
-                options={[
-                    {
-                        label: 'Select an option ...',
-                        value: '',
-                        disabled: false,
-                    },
-                    {label: 'Onetime', value: 'onetime'},
-                    {label: 'Recurring', value: 'recurring'},
-                ]}
-                onChange={(val) =>
-                    setAttributes({defaultPaymentType: val})
-                }
-                help="Default value: onetime."
-            />
-            <SelectControl
-                label="Default Recurring Interval"
-                value={defaultRecurringInterval}
-                options={[
-                    {
-                        label: 'Select an option ...',
-                        value: '',
-                        disabled: false,
-                    },
-                    {label: 'Monthly', value: 'monthly'},
-                    {label: 'Quarterly', value: 'quarterly'},
-                    {label: 'Semestral', value: 'semestral'},
-                    {label: 'Yearly', value: 'yearly'},
-                ]}
-                onChange={(val) =>
-                    setAttributes({defaultRecurringInterval: val})
-                }
-                help="Default value: monthly."
-            />
+            <br />
+            <Panel header="Tamaro Donation Form Settings">
+                <PanelBody title="General Settings" initialOpen={ true }>
+                    <PanelRow>
+                        <TextControl
+                            label="Salesforce Campaign ID"
+                            value={ salesforceCampaignID }
+                            onChange={ ( val ) =>
+                                setAttributes( { salesforceCampaignID: val } )
+                            }
+                            help="Uses a default value if not set. The default value can be set in plugin options."
+                        />
+                    </PanelRow>
 
-            <TextControl
-                label="Minimum Custom Amount Onetime"
-                value={minimumCustomAmountOnetime}
-                onChange={(val) =>
-                    setAttributes({
-                        minimumCustomAmountOnetime: parseInt(val),
-                    })
-                }
-                help="Minimum custom amount which can be set on the form for onetime donations. Default value: 1."
-            />
-            <TextControl
-                label="Amounts Onetime"
-                value={amountsOnetime}
-                onChange={(val) => setAttributes({amountsOnetime: val})}
-                help="Predefined amounts which appear on the form for onetime donations (comma separated list, example: 10,20,30,40). Default value: 39,84,150,250."
-            />
-            <TextControl
-                label="Minimum Custom Amount Recurring (monthly)"
-                value={minimumCustomAmountRecurringMonthly}
-                onChange={(val) =>
-                    setAttributes({
-                        minimumCustomAmountRecurringMonthly: parseInt(val),
-                    })
-                }
-                help="Minimum custom amount which can be set on the form for monthly recurring donations. Default value: 2."
-            />
-            <TextControl
-                label="Amounts Recurring (monthly)"
-                value={amountsRecurringMonthly}
-                onChange={(val) =>
-                    setAttributes({amountsRecurringMonthly: val})
-                }
-                help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 5,10,15,20). Default value: 7,10,20,50."
-            />
+                    <PanelRow>
+                        <SelectControl
+                            label="Salesforce Product"
+                            value={ salesforceProduct }
+                            options={ [
+                                {
+                                    label: 'Select an option ...',
+                                    value: '',
+                                    disabled: false,
+                                },
+                                {
+                                    label: 'Standard Donation',
+                                    value: 'Standard Donation',
+                                },
+                                {
+                                    label: 'Sponsorship Agriculture',
+                                    value: 'Sponsorship Agriculture',
+                                },
+                                {
+                                    label: 'Sponsorship Climate',
+                                    value: 'Sponsorship Climate',
+                                },
+                                {
+                                    label: 'Sponsorship Fleet',
+                                    value: 'Sponsorship Fleet',
+                                },
+                                {
+                                    label: 'Sponsorship Forest',
+                                    value: 'Sponsorship Forest',
+                                },
+                                {
+                                    label: 'Sponsorship Ocean',
+                                    value: 'Sponsorship Ocean',
+                                },
+                            ] }
+                            onChange={ ( val ) =>
+                                setAttributes( { salesforceProduct: val } )
+                            }
+                            help="Default value: Standard Donation."
+                        />
+                    </PanelRow>
 
-            <TextControl
-                label="Salesforce Campaign ID"
-                value={salesforceCampaignID}
-                onChange={(val) =>
-                    setAttributes({salesforceCampaignID: val})
-                }
-                help="Uses a default value if not set. The default value can be set in plugin options."
-            />
-            <SelectControl
-                label="Salesforce Product"
-                value={salesforceProduct}
-                options={[
-                    {
-                        label: 'Select an option ...',
-                        value: '',
-                        disabled: false,
-                    },
-                    {label: 'Standard Donation', value: 'Standard Donation'},
-                    {
-                        label: 'Sponsorship Agriculture',
-                        value: 'Sponsorship Agriculture',
-                    },
-                    {
-                        label: 'Sponsorship Climate',
-                        value: 'Sponsorship Climate',
-                    },
-                    {label: 'Sponsorship Fleet', value: 'Sponsorship Fleet'},
-                    {
-                        label: 'Sponsorship Forest',
-                        value: 'Sponsorship Forest',
-                    },
-                    {label: 'Sponsorship Ocean', value: 'Sponsorship Ocean'},
-                ]}
-                onChange={(val) =>
-                    setAttributes({salesforceProduct: val})
-                }
-                help="Default value: Standard Donation."
-            />
+                    <PanelRow>
+                        <SelectControl
+                            label="Language"
+                            value={ language }
+                            options={ [
+                                {
+                                    label: 'Select an option ...',
+                                    value: '',
+                                    disabled: false,
+                                },
+                                { label: 'German', value: 'de' },
+                                { label: 'French', value: 'fr' },
+                                { label: 'Italian', value: 'it' },
+                            ] }
+                            onChange={ ( val ) =>
+                                setAttributes( { language: val } )
+                            }
+                            help="Default value: en."
+                        />
+                    </PanelRow>
 
+                    <PanelRow>
+                        <SelectControl
+                            label="Default Payment Type"
+                            value={ defaultPaymentType }
+                            options={ [
+                                {
+                                    label: 'Select an option ...',
+                                    value: '',
+                                    disabled: false,
+                                },
+                                { label: 'Onetime', value: 'onetime' },
+                                { label: 'Recurring', value: 'recurring' },
+                            ] }
+                            onChange={ ( val ) =>
+                                setAttributes( { defaultPaymentType: val } )
+                            }
+                            help="Default value: onetime."
+                        />
+                    </PanelRow>
 
-            <Panel header="Custom Fields" initialOpen={false}>
-                <PanelRow className="custom-field-controls">
-                    <p>Custom fields can be used to add additional information to the donation form. The collected
-                        information will only be transferred to RaiseNow, but not to Salesforce.</p>
-                </PanelRow>
+                    <PanelRow>
+                        <SelectControl
+                            label="Default Recurring Interval"
+                            value={ defaultRecurringInterval }
+                            options={ [
+                                {
+                                    label: 'Select an option ...',
+                                    value: '',
+                                    disabled: false,
+                                },
+                                { label: 'Monthly', value: 'monthly' },
+                                { label: 'Quarterly', value: 'quarterly' },
+                                { label: 'Semestral', value: 'semestral' },
+                                { label: 'Yearly', value: 'yearly' },
+                            ] }
+                            onChange={ ( val ) =>
+                                setAttributes( {
+                                    defaultRecurringInterval: val,
+                                } )
+                            }
+                            help="Default value: monthly."
+                        />
+                    </PanelRow>
+                </PanelBody>
 
-                <PanelRow>
-                    <ToggleControl
-                        label="Use Custom Fields"
-                        checked={useCustomFields}
-                        onChange={(val) => setAttributes({useCustomFields: val})}
-                    />
-                </PanelRow>
+                <PanelBody title="Amounts" initialOpen={ false }>
+                    <PanelRow className="amount-controls">
+                        <TextControl
+                            label="Minimum Custom Amount Onetime"
+                            value={ minimumCustomAmountOnetime }
+                            onChange={ ( val ) =>
+                                setAttributes( {
+                                    minimumCustomAmountOnetime: parseInt( val ),
+                                } )
+                            }
+                            help="Minimum custom amount which can be set on the form for onetime donations. Default value: 1."
+                        />
+                    </PanelRow>
 
-                {useCustomFields && (
-                    <>
-                        <Divider />
+                    <PanelRow>
+                        <TextControl
+                            label="Amounts Onetime"
+                            value={ amountsOnetime }
+                            onChange={ ( val ) =>
+                                setAttributes( { amountsOnetime: val } )
+                            }
+                            help="Predefined amounts which appear on the form for onetime donations (comma separated list, example: 10,20,30,40). Default value: 39,84,150,250."
+                        />
+                    </PanelRow>
 
-                        <PanelRow>
-                            <SelectControl
-                                label="Custom Fields Placement"
-                                value={customFieldsPlacement}
-                                options={[
-                                    {label: 'Beginning of form', value: 'beginning'},
-                                    {label: 'After amount', value: 'after-amount'},
-                                    {label: 'End of form', value: 'end'}
-                                ]}
-                                onChange={(val) => setAttributes({customFieldsPlacement: val})}
-                                help="Select where to place the custom fields in the form."
-                            />
-                        </PanelRow>
+                    <PanelRow>
+                        <TextControl
+                            label="Minimum Custom Amount Recurring (monthly)"
+                            value={ minimumCustomAmountRecurringMonthly }
+                            onChange={ ( val ) =>
+                                setAttributes( {
+                                    minimumCustomAmountRecurringMonthly:
+                                        parseInt( val ),
+                                } )
+                            }
+                            help="Minimum custom amount which can be set on the form for monthly recurring donations. Default value: 2."
+                        />
+                    </PanelRow>
 
+                    <PanelRow>
+                        <TextControl
+                            label="Amounts Recurring (monthly)"
+                            value={ amountsRecurringMonthly }
+                            onChange={ ( val ) =>
+                                setAttributes( {
+                                    amountsRecurringMonthly: val,
+                                } )
+                            }
+                            help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 5,10,15,20). Default value: 7,10,20,50."
+                        />
+                    </PanelRow>
+                </PanelBody>
 
-                        <PanelRow>
-                            <TextControl
-                                label="Section title"
-                                value={customFieldsSectionTitle}
-                                onChange={(val) =>
-                                    setAttributes({customFieldsSectionTitle: val})
-                                }
-                                help="Title of the section containing the custom fields."
-                            />
-                        </PanelRow>
+                <PanelBody title="Custom Fields" initialOpen={ false }>
+                    <PanelRow className="custom-field-controls">
+                        <p>
+                            Custom fields can be used to add additional
+                            information to the donation form. The collected
+                            information will only be transferred to RaiseNow,
+                            but not to Salesforce.
+                        </p>
+                    </PanelRow>
 
-                        <PanelRow>
-                            <TextareaControl
-                                label="Description"
-                                help="Enter additional text to show (optional)."
-                                value={customFieldsSectionText}
-                                onChange={(val) =>
-                                    setAttributes({customFieldsSectionText: val})
-                                }
-                            />
-                        </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Use Custom Fields"
+                            checked={ useCustomFields }
+                            onChange={ ( val ) =>
+                                setAttributes( { useCustomFields: val } )
+                            }
+                        />
+                    </PanelRow>
 
-                        {customFields.map((field, index) => (
-                            <CustomField
-                                key={index}
-                                index={index}
-                                field={field}
-                                onChange={(newField) => updateCustomField(index, newField)}
-                                onRemove={() => removeCustomField(index)}
-                                canRemove={customFields.length > MIN_FIELDS}
-                            />
-                        ))}
+                    { useCustomFields && (
+                        <>
+                            <Divider />
 
-                        <PanelRow className="custom-field-controls">
-                            <Button
-                                variant="primary"
-                                onClick={addCustomField}
-                                disabled={customFields.length >= MAX_FIELDS}
-                                __next40pxDefaultSize
-                                className="add-custom-field-button"
-                            >
-                                Add custom field
-                            </Button>
+                            <PanelRow>
+                                <SelectControl
+                                    label="Custom Fields Placement"
+                                    value={ customFieldsPlacement }
+                                    options={ [
+                                        {
+                                            label: 'Beginning of form',
+                                            value: 'beginning',
+                                        },
+                                        {
+                                            label: 'After amount',
+                                            value: 'after-amount',
+                                        },
+                                        { label: 'End of form', value: 'end' },
+                                    ] }
+                                    onChange={ ( val ) =>
+                                        setAttributes( {
+                                            customFieldsPlacement: val,
+                                        } )
+                                    }
+                                    help="Select where to place the custom fields in the form."
+                                />
+                            </PanelRow>
 
-                            <p className="custom-field-count">
-                                {customFields.length} / {MAX_FIELDS} custom fields
-                            </p>
-                        </PanelRow>
-                    </>
-                )}
+                            <PanelRow>
+                                <TextControl
+                                    label="Section title"
+                                    value={ customFieldsSectionTitle }
+                                    onChange={ ( val ) =>
+                                        setAttributes( {
+                                            customFieldsSectionTitle: val,
+                                        } )
+                                    }
+                                    help="Title of the section containing the custom fields."
+                                />
+                            </PanelRow>
+
+                            <PanelRow>
+                                <TextareaControl
+                                    label="Description"
+                                    help="Enter additional text to show (optional)."
+                                    value={ customFieldsSectionText }
+                                    onChange={ ( val ) =>
+                                        setAttributes( {
+                                            customFieldsSectionText: val,
+                                        } )
+                                    }
+                                />
+                            </PanelRow>
+
+                            { customFields.map( ( field, index ) => (
+                                <CustomField
+                                    key={ index }
+                                    index={ index }
+                                    field={ field }
+                                    onChange={ ( newField ) =>
+                                        updateCustomField( index, newField )
+                                    }
+                                    onRemove={ () =>
+                                        removeCustomField( index )
+                                    }
+                                    canRemove={
+                                        customFields.length > MIN_FIELDS
+                                    }
+                                />
+                            ) ) }
+
+                            <PanelRow className="custom-field-controls">
+                                <Button
+                                    variant="primary"
+                                    onClick={ addCustomField }
+                                    disabled={
+                                        customFields.length >= MAX_FIELDS
+                                    }
+                                    __next40pxDefaultSize
+                                    className="add-custom-field-button"
+                                >
+                                    Add custom field
+                                </Button>
+
+                                <p className="custom-field-count">
+                                    { customFields.length } / { MAX_FIELDS }{ ' ' }
+                                    custom fields
+                                </p>
+                            </PanelRow>
+                        </>
+                    ) }
+                </PanelBody>
+                <PanelBody title="Debug" initialOpen={ false }>
+                    <PanelRow>
+                        <CheckboxControl
+                            label="Debug"
+                            checked={ debug }
+                            onChange={ ( val ) =>
+                                setAttributes( { debug: val } )
+                            }
+                            help="Default value: false."
+                        />
+                    </PanelRow>
+
+                    <PanelRow>
+                        <CheckboxControl
+                            label="Test Mode"
+                            checked={ testMode }
+                            onChange={ ( val ) =>
+                                setAttributes( { testMode: val } )
+                            }
+                            help="Default value: false."
+                        />
+                    </PanelRow>
+                </PanelBody>
             </Panel>
         </div>
     );
