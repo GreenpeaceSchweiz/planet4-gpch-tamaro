@@ -27,6 +27,11 @@ export default function Edit({attributes, setAttributes}) {
         amountsRecurringMonthly,
         salesforceCampaignID,
         salesforceProduct,
+        useAmountDescriptions,
+        amountDescriptionsOnetime = {},
+        amountDescriptionCustomOnetime,
+        amountDescriptionsRecurringMonthly = {},
+        amountDescriptionCustomRecurring,
         useCustomFields,
         customFieldsSectionTitle,
         customFieldsSectionText,
@@ -241,6 +246,98 @@ export default function Edit({attributes, setAttributes}) {
                             help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 5,10,15,20). Default value: 7,10,20,50."
                         />
                     </PanelRow>
+                </PanelBody>
+
+                <PanelBody title="Amount Descriptions" initialOpen={ false }>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Use Amount Descriptions"
+                            checked={ useAmountDescriptions }
+                            onChange={ ( val ) =>
+                                setAttributes( { useAmountDescriptions: val } )
+                            }
+                        />
+                    </PanelRow>
+
+                    { useAmountDescriptions && (
+                        <>
+                            <Divider />
+
+                            <PanelRow>
+                                <p><strong>Onetime Amounts</strong></p>
+                            </PanelRow>
+
+                            { amountsOnetime && amountsOnetime.split( ',' ).map( ( amount ) => {
+                                const key = amount.trim();
+                                return (
+                                    <PanelRow key={ `onetime-${ key }` }>
+                                        <TextControl
+                                            label={ `Amount ${ key } Description` }
+                                            value={ amountDescriptionsOnetime?.[ key ] || '' }
+                                            onChange={ ( val ) =>
+                                                setAttributes( {
+                                                    amountDescriptionsOnetime: {
+                                                        ...amountDescriptionsOnetime,
+                                                        [ key ]: val,
+                                                    },
+                                                } )
+                                            }
+                                        />
+                                    </PanelRow>
+                                );
+                            } ) }
+
+                            <PanelRow>
+                                <TextControl
+                                    label="Custom Amount Description (Onetime)"
+                                    value={ amountDescriptionCustomOnetime || '' }
+                                    onChange={ ( val ) =>
+                                        setAttributes( {
+                                            amountDescriptionCustomOnetime: val,
+                                        } )
+                                    }
+                                />
+                            </PanelRow>
+
+                            <Divider />
+
+                            <PanelRow>
+                                <p><strong>Recurring Monthly Amounts</strong></p>
+                            </PanelRow>
+
+                            { amountsRecurringMonthly && amountsRecurringMonthly.split( ',' ).map( ( amount ) => {
+                                const key = amount.trim();
+                                return (
+                                    <PanelRow key={ `recurring-${ key }` }>
+                                        <TextControl
+                                            label={ `Amount ${ key } Description` }
+                                            value={ amountDescriptionsRecurringMonthly?.[ key ] || '' }
+                                            onChange={ ( val ) =>
+                                                setAttributes( {
+                                                    amountDescriptionsRecurringMonthly: {
+                                                        ...amountDescriptionsRecurringMonthly,
+                                                        [ key ]: val,
+                                                    },
+                                                } )
+                                            }
+                                        />
+                                    </PanelRow>
+                                );
+                            } ) }
+
+                            <PanelRow>
+                                <TextControl
+                                    label="Custom Amount Description (Recurring)"
+                                    value={ amountDescriptionCustomRecurring || '' }
+                                    onChange={ ( val ) =>
+                                        setAttributes( {
+                                            amountDescriptionCustomRecurring: val,
+                                        } )
+                                    }
+                                />
+                            </PanelRow>
+                        </>
+                    ) }
                 </PanelBody>
 
                 <PanelBody title="Custom Fields" initialOpen={ false }>

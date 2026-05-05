@@ -176,6 +176,85 @@
             },
 			translations: {
 				en: {
+					amount_descriptions: [
+						{
+							if: 'paymentType() == onetime',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsOnetime %}
+								{
+									if: 'amount() == {{ amount }}',
+									then: '{{ description|escape('js') }}',
+								},
+								{% endfor %}
+
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomOnetime|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == monthly',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringMonthly %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == quarterly',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringQuarterly %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == semestral',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringSemestral %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == yearly',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringYearly %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						
+					],
 					purposes: {
 						p1: 'Greenpeace Switzerland'
 					},

@@ -41,6 +41,23 @@
 		"salesforceProduct": {
 			"type": "string"
 		},
+        "useAmountDescriptions": {
+            "type": "boolean"
+        },
+        "amountDescriptionsOnetime": {
+            "type": "object",
+            "default": {}
+        },
+        "amountDescriptionCustomOnetime": {
+            "type": "string"
+        },
+        "amountDescriptionsRecurringMonthly": {
+            "type": "object",
+            "default": {}
+        },
+        "amountDescriptionCustomRecurring": {
+            "type": "string"
+        },
         "useCustomFields": {
             "type": "boolean"
         },
