@@ -41,7 +41,8 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$defaultAttributes['minimumCustomAmountRecurringSemestral'] = 12;
 	$defaultAttributes['minimumCustomAmountRecurringYearly'] = 24;
 	$defaultAttributes['amountsRecurringMonthly'] = '7,10,20,50';
-    $defaultAttributes['salesforceCampaignID'] = get_option('default_salesforce_campaign_id');
+	$defaultAttributes['preselectCoverTransactionFees'] = false;
+	$defaultAttributes['salesforceCampaignID'] = get_option('default_salesforce_campaign_id');
 	$defaultAttributes['salesforceProduct'] = 'Standard Donation';
 
 	// Tamaro Attributes
@@ -125,6 +126,46 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 		$tamaroAttributes['amountsRecurringQuarterly'] = multiplyAmounts( $defaultAmountsRecurringMonthly, 3 );
 		$tamaroAttributes['amountsRecurringSemestral'] = multiplyAmounts( $defaultAmountsRecurringMonthly, 6 );
 		$tamaroAttributes['amountsRecurringYearly']    = multiplyAmounts( $defaultAmountsRecurringMonthly, 12 );
+	}
+
+	// preselectCoverTransactionFees
+	$tamaroAttributes['preselectCoverTransactionFees'] = $block_attributes['preselectCoverTransactionFees'] ?? $defaultAttributes['preselectCoverTransactionFees'];
+
+	// Amount descriptions
+	if($block_attributes['useAmountDescriptions']) {
+		$tamaroAttributes['amountDescriptionsOnetime'] = is_array( $block_attributes['amountDescriptionsOnetime'] ?? null )
+			? $block_attributes['amountDescriptionsOnetime']
+			: array();
+
+		$tamaroAttributes['amountDescriptionCustomOnetime'] = is_string( $block_attributes['amountDescriptionCustomOnetime'] ?? null )
+			? $block_attributes['amountDescriptionCustomOnetime']
+			: array();
+
+		$tamaroAttributes['amountDescriptionsRecurringMonthly'] = is_array( $block_attributes['amountDescriptionsRecurringMonthly'] ?? null )
+			? $block_attributes['amountDescriptionsRecurringMonthly']
+			: array();
+
+
+		if ( is_array( $block_attributes['amountDescriptionsRecurringMonthly'] ?? null ) ) {
+			$tamaroAttributes['amountDescriptionsRecurringQuarterly'] = array();
+			foreach ( $block_attributes['amountDescriptionsRecurringMonthly'] as $amount => $description ) {
+				$tamaroAttributes['amountDescriptionsRecurringQuarterly'][ $amount * 3 ] = $description;
+			}
+
+			$tamaroAttributes['amountDescriptionsRecurringSemestral'] = array();
+			foreach ( $block_attributes['amountDescriptionsRecurringMonthly'] as $amount => $description ) {
+				$tamaroAttributes['amountDescriptionsRecurringSemestral'][ $amount * 6 ] = $description;
+			}
+			$tamaroAttributes['amountDescriptionsRecurringYearly'] = array();
+			foreach ( $block_attributes['amountDescriptionsRecurringMonthly'] as $amount => $description ) {
+				$tamaroAttributes['amountDescriptionsRecurringYearly'][ $amount * 12 ] = $description;
+			}
+
+		} 
+
+		$tamaroAttributes['amountDescriptionCustomRecurring'] = is_string( $block_attributes['amountDescriptionCustomRecurring'] ?? null )
+			? $block_attributes['amountDescriptionCustomRecurring']
+			: array();
 	}
 
 	// salesforceCampaignID
