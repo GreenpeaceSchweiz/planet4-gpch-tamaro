@@ -15,13 +15,17 @@
 			showStoredCustomerDonationReceipt: false,
 			show_submit_button: false,
 			show_footer: false,
+			highlightRecurring: true,
 			paymentFormPrefill: {
 				stored_customer_email_permission: true,
 				stored_customer_donation_receipt: true,
 				stored_sf_Contact_Source__c: 'Internet',
 				gpch_product: '{{ tamaroAttributes.salesforceProduct }}',
 				stored_sf_Opportunity_Product__c: '',
-				stored_sf_npe03__Recurring_Donation__c_Product__c: ''
+				stored_sf_npe03__Recurring_Donation__c_Product__c: '',
+				{% if tamaroAttributes.preselectCoverTransactionFees %}
+					stored_cover_transaction_fee: 'true',
+				{% endif %}
 			},
 			paymentMethods: [
 				'twint',
@@ -176,6 +180,85 @@
             },
 			translations: {
 				en: {
+					amount_descriptions: [
+						{
+							if: 'paymentType() == onetime',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsOnetime %}
+								{
+									if: 'amount() == {{ amount }}',
+									then: '{{ description|escape('js') }}',
+								},
+								{% endfor %}
+
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomOnetime|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == monthly',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringMonthly %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == quarterly',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringQuarterly %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == semestral',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringSemestral %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						{
+							if: 'paymentType() == recurring && recurringInterval() == yearly',
+							then: [
+								{% for amount, description in tamaroAttributes.amountDescriptionsRecurringYearly %}
+									{
+										if: 'amount() == {{ amount }}',
+										then: '{{ description|escape('js') }}',
+									},
+								{% endfor %}
+								{
+									if: 'amount() == custom_amount',
+									then: '{{ tamaroAttributes.amountDescriptionCustomRecurring|escape('js') }}',
+								},
+							],
+						},
+						
+					],
 					purposes: {
 						p1: 'Greenpeace Switzerland'
 					},
