@@ -35,6 +35,10 @@
 		"amountsRecurringMonthly": {
 			"type": "string"
 		},
+		"preselectCoverTransactionFees": {
+			"type": "boolean",
+			"default": false
+		},
 		"salesforceCampaignID": {
 			"type": "string"
 		},

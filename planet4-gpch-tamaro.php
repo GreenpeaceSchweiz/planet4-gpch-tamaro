@@ -41,7 +41,8 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$defaultAttributes['minimumCustomAmountRecurringSemestral'] = 12;
 	$defaultAttributes['minimumCustomAmountRecurringYearly'] = 24;
 	$defaultAttributes['amountsRecurringMonthly'] = '7,10,20,50';
-    $defaultAttributes['salesforceCampaignID'] = get_option('default_salesforce_campaign_id');
+	$defaultAttributes['preselectCoverTransactionFees'] = false;
+	$defaultAttributes['salesforceCampaignID'] = get_option('default_salesforce_campaign_id');
 	$defaultAttributes['salesforceProduct'] = 'Standard Donation';
 
 	// Tamaro Attributes
@@ -126,6 +127,9 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 		$tamaroAttributes['amountsRecurringSemestral'] = multiplyAmounts( $defaultAmountsRecurringMonthly, 6 );
 		$tamaroAttributes['amountsRecurringYearly']    = multiplyAmounts( $defaultAmountsRecurringMonthly, 12 );
 	}
+
+	// preselectCoverTransactionFees
+	$tamaroAttributes['preselectCoverTransactionFees'] = $block_attributes['preselectCoverTransactionFees'] ?? $defaultAttributes['preselectCoverTransactionFees'];
 
 	// Amount descriptions
 	if($block_attributes['useAmountDescriptions']) {

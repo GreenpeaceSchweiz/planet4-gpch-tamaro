@@ -25,6 +25,7 @@ export default function Edit({attributes, setAttributes}) {
         amountsOnetime,
         minimumCustomAmountRecurringMonthly,
         amountsRecurringMonthly,
+        preselectCoverTransactionFees,
         salesforceCampaignID,
         salesforceProduct,
         useAmountDescriptions,
@@ -244,6 +245,19 @@ export default function Edit({attributes, setAttributes}) {
                                 } )
                             }
                             help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 5,10,15,20). Default value: 7,10,20,50."
+                        />
+                    </PanelRow>
+
+                    <PanelRow>
+                        <ToggleControl
+                            label="Preselect checkbox to Cover Transaction Fees"
+                            checked={ preselectCoverTransactionFees }
+                            onChange={ ( val ) =>
+                                setAttributes( {
+                                    preselectCoverTransactionFees: val,
+                                } )
+                            }
+                            help="Default value: false."
                         />
                     </PanelRow>
                 </PanelBody>

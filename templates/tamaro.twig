@@ -22,7 +22,10 @@
 				stored_sf_Contact_Source__c: 'Internet',
 				gpch_product: '{{ tamaroAttributes.salesforceProduct }}',
 				stored_sf_Opportunity_Product__c: '',
-				stored_sf_npe03__Recurring_Donation__c_Product__c: ''
+				stored_sf_npe03__Recurring_Donation__c_Product__c: '',
+				{% if tamaroAttributes.preselectCoverTransactionFees %}
+					stored_cover_transaction_fee: 'true',
+				{% endif %}
 			},
 			paymentMethods: [
 				'twint',
