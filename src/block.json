@@ -45,40 +45,40 @@
 		"salesforceProduct": {
 			"type": "string"
 		},
-        "useAmountDescriptions": {
-            "type": "boolean"
-        },
-        "amountDescriptionsOnetime": {
-            "type": "object",
-            "default": {}
-        },
-        "amountDescriptionCustomOnetime": {
-            "type": "string"
-        },
-        "amountDescriptionsRecurringMonthly": {
-            "type": "object",
-            "default": {}
-        },
-        "amountDescriptionCustomRecurring": {
-            "type": "string"
-        },
-        "useCustomFields": {
-            "type": "boolean"
-        },
-        "customFieldsPlacement": {
-          "type": "string",
-          "default": "beginning"
-        },
-        "customFieldsSectionTitle": {
-            "type": "string"
-        },
-        "customFieldsSectionText": {
-            "type": "string"
-        },
-        "customFields": {
-            "type": "array",
-            "default": []
-      }
+		"useAmountDescriptions": {
+			"type": "boolean"
+		},
+		"amountDescriptionsOnetime": {
+			"type": "object",
+			"default": {}
+		},
+		"amountDescriptionCustomOnetime": {
+			"type": "string"
+		},
+		"amountDescriptionsRecurringMonthly": {
+			"type": "object",
+			"default": {}
+		},
+		"amountDescriptionCustomRecurring": {
+			"type": "string"
+		},
+		"useCustomFields": {
+			"type": "boolean"
+		},
+		"customFieldsPlacement": {
+			"type": "string",
+			"default": "beginning"
+		},
+		"customFieldsSectionTitle": {
+			"type": "string"
+		},
+		"customFieldsSectionText": {
+			"type": "string"
+		},
+		"customFields": {
+			"type": "array",
+			"default": []
+		}
 	},
 	"supports": {
 		"html": false
