@@ -26,6 +26,11 @@
 				{% if tamaroAttributes.preselectCoverTransactionFees %}
 					stored_cover_transaction_fee: 'true',
 				{% endif %}
+				{% for field in tamaroAttributes.customFields %}
+					{% if field.fieldType == 'checkbox-group' and field.isPreselected %}
+						'stored_{{ field.fieldName }}': true,
+					{% endif %}
+				{% endfor %}
 			},
 			paymentMethods: [
 				'twint',
