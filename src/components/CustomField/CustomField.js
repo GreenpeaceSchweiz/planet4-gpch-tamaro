@@ -11,6 +11,7 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
         fieldLabel,
         fieldName,
         isRequired = false,
+        isPreselected = false,
         options = [''],
     } = field;
 
@@ -56,6 +57,9 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
 
     // Fields that can be set to required
     const canBeRequired = fieldType === 'text' || fieldType === 'textarea';
+
+    // Checkbox field can be preselected
+    const canBePreselected = fieldType === 'checkbox-group';
 
     const slugifyFieldName = (value) =>
         value
@@ -156,6 +160,15 @@ const CustomField = ({field, index, onChange, onRemove, canRemove}) => {
                     checked={isRequired}
                     onChange={(val) => updateField({isRequired: val})}
                     help={__('The form can not be submitted without filling in this field.', 'planet4-gpch-tamaro')}
+                />
+            )}
+
+            {canBePreselected && (
+                <CheckboxControl
+                    label={__('Preselected', 'planet4-gpch-tamaro')}
+                    checked={isPreselected}
+                    onChange={(val) => updateField({isPreselected: val})}
+                    help={__('Render this checkbox as selected by default in the form.', 'planet4-gpch-tamaro')}
                 />
             )}
 
