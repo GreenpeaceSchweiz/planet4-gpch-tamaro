@@ -32,6 +32,14 @@
 					{% endif %}
 				{% endfor %}
 			},
+			paymentTypes: [
+				{% if tamaroAttributes.donationTypes != 'recurring' %}
+					'onetime',
+				{% endif %}
+				{% if tamaroAttributes.donationTypes != 'onetime' %}
+					'recurring',
+				{% endif %}
+			],
 			paymentMethods: [
 				'twint',
 				'card',

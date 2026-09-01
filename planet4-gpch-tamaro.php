@@ -32,6 +32,7 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 	$defaultAttributes['debug'] = 'false';
 	$defaultAttributes['testMode'] = 'false';
 	$defaultAttributes['language'] = 'en';
+	$defaultAttributes['donationTypes'] = 'both';
 	$defaultAttributes['defaultPaymentType'] = 'onetime';
 	$defaultAttributes['defaultRecurringInterval'] = 'monthly';
 	$defaultAttributes['minimumCustomAmountOnetime'] = 1;
@@ -67,6 +68,14 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 		$tamaroAttributes['language'] = $block_attributes['language'];
 	} else {
 		$tamaroAttributes['language'] = $defaultAttributes['language'];
+	}
+
+	// donationTypes
+	$allowedDonationTypes = array( 'both', 'recurring', 'onetime' );
+	if ( array_key_exists( 'donationTypes', $block_attributes ) && in_array( $block_attributes['donationTypes'], $allowedDonationTypes ) ) {
+		$tamaroAttributes['donationTypes'] = $block_attributes['donationTypes'];
+	} else {
+		$tamaroAttributes['donationTypes'] = $defaultAttributes['donationTypes'];
 	}
 
 	// defaultPaymentType

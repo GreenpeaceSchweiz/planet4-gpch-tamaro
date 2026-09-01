@@ -21,6 +21,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		debug,
 		testMode,
 		language,
+		donationTypes,
 		defaultPaymentType,
 		defaultRecurringInterval,
 		minimumCustomAmountOnetime,
@@ -154,6 +155,25 @@ export default function Edit( { attributes, setAttributes } ) {
 								setAttributes( { language: val } )
 							}
 							help="Default value: en."
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<SelectControl
+							label="Show Recurring/One-off donations"
+							value={ donationTypes }
+							options={ [
+								{
+									label: 'Both recurring and one-off',
+									value: 'both',
+								},
+								{ label: 'Recurring only', value: 'recurring' },
+								{ label: 'One-off only', value: 'onetime' },
+							] }
+							onChange={ ( val ) =>
+								setAttributes( { donationTypes: val } )
+							}
+							help="Default value: both."
 						/>
 					</PanelRow>
 
