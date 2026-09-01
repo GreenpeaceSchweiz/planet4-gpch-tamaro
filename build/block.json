@@ -17,6 +17,10 @@
     "language": {
       "type": "string"
     },
+    "donationTypes": {
+      "type": "string",
+      "default": "both"
+    },
     "defaultPaymentType": {
       "type": "string"
     },
