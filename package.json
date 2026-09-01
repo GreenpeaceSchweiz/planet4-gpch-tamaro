@@ -15,16 +15,16 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^32.5.0"
+		"@wordpress/scripts": "^34.2.0"
 	},
 	"jshintConfig": {
 		"esversion": 11
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^15.0.0",
-		"@wordpress/blocks": "^15.6.0",
-		"@wordpress/components": "^36.0.0",
-		"@wordpress/element": "^8.1.0",
-		"@wordpress/i18n": "^6.22.0"
+		"@wordpress/block-editor": "^17.0.0",
+		"@wordpress/blocks": "^15.27.0",
+		"@wordpress/components": "^40.0.0",
+		"@wordpress/element": "^8.6.0",
+		"@wordpress/i18n": "^6.27.0"
 	}
 }
