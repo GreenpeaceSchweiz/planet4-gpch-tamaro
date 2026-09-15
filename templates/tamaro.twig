@@ -5,6 +5,16 @@
 	<script src="https://tamaro.raisenow.com/greenpeace-ch-default/latest/widget.js"></script>
 
 	<script>
+		const preselectedAmounts = {
+			onetime: {% if tamaroAttributes.preselectedAmountOnetime is defined %}{{ tamaroAttributes.preselectedAmountOnetime }}{% else %}null{% endif %},
+			recurring: {
+				monthly: {% if tamaroAttributes.preselectedAmountRecurringMonthly is defined %}{{ tamaroAttributes.preselectedAmountRecurringMonthly }}{% else %}null{% endif %},
+				quarterly: {% if tamaroAttributes.preselectedAmountRecurringQuarterly is defined %}{{ tamaroAttributes.preselectedAmountRecurringQuarterly }}{% else %}null{% endif %},
+				semestral: {% if tamaroAttributes.preselectedAmountRecurringSemestral is defined %}{{ tamaroAttributes.preselectedAmountRecurringSemestral }}{% else %}null{% endif %},
+				yearly: {% if tamaroAttributes.preselectedAmountRecurringYearly is defined %}{{ tamaroAttributes.preselectedAmountRecurringYearly }}{% else %}null{% endif %},
+			},
+		};
+
 		window.rnw.tamaro.runWidget('.rnw-widget-container', {
 			debug: {{ tamaroAttributes.debug }},
 			testMode: {{ tamaroAttributes.testMode }},
@@ -17,6 +27,9 @@
 			paymentFormPrefill: {
 				payment_type: '{{ tamaroAttributes.defaultPaymentType }}',
 				recurring_interval: '{{ tamaroAttributes.defaultRecurringInterval }}',
+				{% if tamaroAttributes.preselectedAmount is defined %}
+					amount: {{ tamaroAttributes.preselectedAmount }},
+				{% endif %}
 				stored_customer_email_permission: true,
 				stored_customer_donation_receipt: true,
 				stored_sf_Contact_Source__c: 'Internet',
@@ -386,6 +399,18 @@
 		});
 
 		var gpchTamaro = gpchTamaro || {};
+
+		window.rnw.tamaro.events.paymentTypeChanged.subscribe(function (event) {
+			const paymentForm = event.data.api.paymentForm;
+			const paymentType = paymentForm.data.payment_type;
+			const preselectedAmount = paymentType === 'onetime'
+				? preselectedAmounts.onetime
+				: preselectedAmounts.recurring[paymentForm.data.recurring_interval];
+
+			if (preselectedAmount !== null) {
+				paymentForm.data.amount = preselectedAmount;
+			}
+		});
 
 		// The currently selected payment method
 		let tamaroPaymentMethod = null;

@@ -26,8 +26,10 @@ export default function Edit( { attributes, setAttributes } ) {
 		defaultRecurringInterval,
 		minimumCustomAmountOnetime,
 		amountsOnetime,
+		preselectedAmountOnetime,
 		minimumCustomAmountRecurringMonthly,
 		amountsRecurringMonthly,
+		preselectedAmountRecurringMonthly,
 		preselectCoverTransactionFees,
 		salesforceCampaignID,
 		salesforceProduct,
@@ -247,6 +249,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelRow>
 
+					<PanelRow className="amount-controls">
+						<TextControl
+							label="Preselected Amount Onetime"
+							value={ preselectedAmountOnetime }
+							onChange={ ( val ) =>
+								setAttributes( {
+									preselectedAmountOnetime: parseInt( val ),
+								} )
+							}
+							help="Preselected amount for onetime donations. Leave empty if none."
+						/>
+					</PanelRow>
+
+					<hr />
+
 					<PanelRow>
 						<TextControl
 							label="Minimum Custom Amount Recurring (monthly)"
@@ -273,6 +290,22 @@ export default function Edit( { attributes, setAttributes } ) {
 							help="Predefined amounts which appear on the form for monthly recurring donations (comma separated list, example: 5,10,15,20). Default value: 7,10,20,50."
 						/>
 					</PanelRow>
+
+					<PanelRow className="amount-controls">
+						<TextControl
+							label="Preselected Amount Recurring (monthly)"
+							value={ preselectedAmountRecurringMonthly }
+							onChange={ ( val ) =>
+								setAttributes( {
+									preselectedAmountRecurringMonthly:
+										parseInt( val ),
+								} )
+							}
+							help="Preselected amount for monthly recurring donations. Leave empty if none."
+						/>
+					</PanelRow>
+
+					<hr />
 
 					<PanelRow>
 						<ToggleControl
