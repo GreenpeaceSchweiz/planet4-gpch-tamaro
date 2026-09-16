@@ -33,11 +33,17 @@
     "amountsOnetime": {
       "type": "string"
     },
+    "preselectedAmountOnetime": {
+      "type": "integer"
+    },
     "minimumCustomAmountRecurringMonthly": {
       "type": "integer"
     },
     "amountsRecurringMonthly": {
       "type": "string"
+    },
+    "preselectedAmountRecurringMonthly": {
+      "type": "integer"
     },
     "preselectCoverTransactionFees": {
       "type": "boolean",
