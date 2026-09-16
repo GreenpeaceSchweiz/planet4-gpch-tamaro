@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Planet4 GPCH Tamaro
  * Description:       A plugin to provide the RaiseNow Tamaro Widget as a configurable block.
- * Version:           1.0.26
+ * Version:           1.0.27
  * Requires at least: 5.9
  * Requires PHP:      7.0
  * Author:            Greenpeace Switzerland
@@ -92,6 +92,31 @@ function planet4_gpch_tamaro_render_callback( $block_attributes, $content ) {
 		$tamaroAttributes['defaultRecurringInterval'] = $block_attributes['defaultRecurringInterval'];
 	} else {
 		$tamaroAttributes['defaultRecurringInterval'] = $defaultAttributes['defaultRecurringInterval'];
+	}
+
+	if ( array_key_exists( 'preselectedAmountOnetime', $block_attributes ) && is_integer( $block_attributes['preselectedAmountOnetime'] ) && $block_attributes['preselectedAmountOnetime'] > 0 ) {
+		$tamaroAttributes['preselectedAmountOnetime'] = $block_attributes['preselectedAmountOnetime'];
+	}
+
+	if ( array_key_exists( 'preselectedAmountRecurringMonthly', $block_attributes ) && is_integer( $block_attributes['preselectedAmountRecurringMonthly'] ) && $block_attributes['preselectedAmountRecurringMonthly'] > 0 ) {
+		$recurringIntervalMultipliers = array(
+			'monthly' => 1,
+			'quarterly' => 3,
+			'semestral' => 6,
+			'yearly' => 12,
+		);
+		foreach ( $recurringIntervalMultipliers as $interval => $multiplier ) {
+			$tamaroAttributes['preselectedAmountRecurring' . ucfirst( $interval )] = $block_attributes['preselectedAmountRecurringMonthly'] * $multiplier;
+		}
+	}
+
+	if ( $tamaroAttributes['defaultPaymentType'] === 'onetime' && isset( $tamaroAttributes['preselectedAmountOnetime'] ) ) {
+		$tamaroAttributes['preselectedAmount'] = $tamaroAttributes['preselectedAmountOnetime'];
+	} elseif ( $tamaroAttributes['defaultPaymentType'] === 'recurring' ) {
+		$defaultRecurringAmountKey = 'preselectedAmountRecurring' . ucfirst( $tamaroAttributes['defaultRecurringInterval'] );
+		if ( isset( $tamaroAttributes[ $defaultRecurringAmountKey ] ) ) {
+			$tamaroAttributes['preselectedAmount'] = $tamaroAttributes[ $defaultRecurringAmountKey ];
+		}
 	}
 
 	// minimumCustomAmountOnetime
